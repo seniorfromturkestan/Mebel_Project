@@ -11,7 +11,7 @@ import elem9 from '../img/stul3.webp'
 export const items = [
     {
         id: 1,
-        title: 'Стулья',
+        title: 'Стул Hiroki',
         img: elem1,
         description: 'Удобный и стильный стул для дома и офиса.',
         category: 'chairs',
@@ -19,15 +19,15 @@ export const items = [
     },
     {
         id: 2,
-        title: 'Стол',
+        title: 'Стол Dilon Wood',
         img: elem2,
         description: 'Прочный деревянный стол для обедов и работы.',
         category: 'tables',
-        price: '47990'
+        price: '49990'
     },
     {
         id: 3,
-        title: 'Диван',
+        title: 'Диван Harvie Beige',
         img: elem3,
         description: 'Комфортабельный диван с мягкой обивкой и подушками.',
         category: 'sofa',
@@ -35,7 +35,7 @@ export const items = [
     },
     {
         id: 4,
-        title: 'Кресло',
+        title: 'Креслo Avalon',
         img: elem4,
         description: 'Эргономичное кресло с приятной тканевой отделкой.',
         category: 'sofa',
@@ -43,7 +43,7 @@ export const items = [
     },
     {
         id: 5,
-        title: 'Стол',
+        title: 'Стол Velvet Crem',
         img: elem5,
         description: 'Большой стол для семейных обедов или встреч.',
         category: 'tables',
@@ -51,7 +51,7 @@ export const items = [
     },
     {
         id: 6,
-        title: 'Диван',
+        title: 'Диван Bordo',
         img: elem6,
         description: 'Элегантный диван с современным дизайном и комфортом.',
         category: 'sofa',
@@ -59,7 +59,7 @@ export const items = [
     },
     {
         id: 7,
-        title: 'Cтул',
+        title: 'Cтул Vertical Terra',
         img: elem7,
         description: 'Элегантный стул с современным дизайном и комфортом.',
         category: 'chairs',
@@ -67,7 +67,7 @@ export const items = [
     },
     {
         id: 8,
-        title: 'Cтол',
+        title: 'Cтол Glossy',
         img: elem8,
         description: 'Большой стол для семейных обедов или встреч.',
         category: 'tables',
@@ -75,7 +75,7 @@ export const items = [
     },
     {
         id: 9,
-        title: 'Cтул',
+        title: 'Cтул Walnut',
         img: elem9,
         description: 'Элегантный стул с современным дизайном и комфортом.',
         category: 'chairs',

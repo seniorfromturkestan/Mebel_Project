@@ -8,7 +8,11 @@ module.exports = {
 
   ],
   theme: {
-    extend: {},
+    extend: {
+      dropShadow: {
+        'tiktok-red-blue': '2px 0px 0px #FD3E3E, -1px -1px 0px #4DE8F4',
+      },
+    },
   },
   plugins: [
     plugin(function({ addBase }) {

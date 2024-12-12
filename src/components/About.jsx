@@ -57,58 +57,60 @@ const About = () => {
   };
 
   return (
-    <div className="relative w-full max-w-[1280px] mx-auto">
-      <div className="relative flex items-center justify-center ">
-        <button
-          className="absolute -left-10 z-10 bg-gray-700 text-white rounded-full p-2 hover:bg-gray-800 focus:outline-none"
-          onClick={prevSlide}
-        >
-          <FaAngleLeft/>
-        </button>
-        <div className="w-full h-[500px] relative overflow-hidden">
-          {slides.map((slide, index) => (
-            <div
-              key={index}
-              className={`absolute w-full h-full bg-cover bg-center bg-blend-multiply bg-[#bcbcbc] transition-transform duration-300 ${
-                index === currentIndex
-                  ? 'translate-x-0'
-                  : direction === 'right'
-                  ? 'translate-x-full'
-                  : '-translate-x-full'
-              }`}
-              style={{ backgroundImage: `url(${slide.image})` }}
-            >
-              <div className="absolute  w-full h-full"></div>
-              <span className="absolute text-white font-semibold w-[300px] top-[100px] left-[50px] text-4xl z-10">
-                {slide.title}
-              </span>
-              <span className="absolute text-white font-light w-[300px] top-[220px] left-[50px] text-lg z-10">
-                {slide.subtitle}
-              </span>
+    <div className="wrapper">
+          <div className="relative w-full max-w-[1280px] mx-auto mt-32">
+            <div className="relative flex items-center justify-center">
+              <button
+                className="absolute -left-10 z-10 bg-gray-700 text-white rounded-full p-2 hover:bg-gray-800 focus:outline-none"
+                onClick={prevSlide}
+              >
+                <FaAngleLeft/>
+              </button>
+              <div className="w-full h-[500px] relative overflow-hidden">
+                {slides.map((slide, index) => (
+                  <div
+                    key={index}
+                    className={`absolute w-full h-full bg-cover bg-center bg-blend-multiply bg-[#bcbcbc] transition-transform duration-300 ${
+                      index === currentIndex
+                        ? 'translate-x-0'
+                        : direction === 'right'
+                        ? 'translate-x-full'
+                        : '-translate-x-full'
+                    }`}
+                    style={{ backgroundImage: `url(${slide.image})` }}
+                  >
+                    <div className="absolute  w-full h-full"></div>
+                    <span className="absolute text-white font-semibold w-[300px] top-[100px] left-[50px] text-4xl z-10">
+                      {slide.title}
+                    </span>
+                    <span className="absolute text-white font-light w-[300px] top-[220px] left-[50px] text-lg z-10">
+                      {slide.subtitle}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <button
+                className="absolute -right-10 z-10 bg-gray-700 text-white rounded-full p-2 hover:bg-gray-800 focus:outline-none"
+                onClick={nextSlide}
+              >
+                <FaAngleRight/>
+              </button>
             </div>
-          ))}
-        </div>
-        <button
-          className="absolute -right-10 z-10 bg-gray-700 text-white rounded-full p-2 hover:bg-gray-800 focus:outline-none"
-          onClick={nextSlide}
-        >
-          <FaAngleRight/>
-        </button>
-      </div>
-      <div className="flex justify-center mt-4 space-x-2">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            className={`w-3 h-3 rounded-full ${
-              index === currentIndex ? 'bg-gray-800' : 'bg-gray-400'
-            }`}
-            onClick={() => {
-              setDirection(index > currentIndex ? 'right' : 'left');
-              setCurrentIndex(index);
-            }}
-          ></button>
-        ))}
-      </div>
+            <div className="flex justify-center mt-4 space-x-2">
+              {slides.map((_, index) => (
+                <button
+                  key={index}
+                  className={`w-3 h-3 rounded-full ${
+                    index === currentIndex ? 'bg-gray-800' : 'bg-gray-400'
+                  }`}
+                  onClick={() => {
+                    setDirection(index > currentIndex ? 'right' : 'left');
+                    setCurrentIndex(index);
+                  }}
+                ></button>
+              ))}
+            </div>
+          </div>
     </div>
   );
 };
