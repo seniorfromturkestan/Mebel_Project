@@ -7,6 +7,7 @@ import { items } from './helpers/data';
 import AboutUs from './components/AboutUs';
 import Basket from './components/Basket';
 import ChatToggle from './components/Chat';
+import ItemDetail from './components/ItemDetail';
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -72,6 +73,8 @@ function App() {
             />
           }
         />
+        <Route path="/:id" element={<ItemDetail items={items} addToCart={addToCart} />} />
+
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/basket" element={<Basket cart={cart} removeFromCart={removeFromCart} />} />
       </Routes>

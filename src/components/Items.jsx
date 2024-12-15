@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import About from "./About";
 import { FaRegHeart } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 
 const categoryNames = {
     chairs: 'Стулья',
@@ -53,30 +54,24 @@ const Items = ({ items, addToCart, searchQuery, clickedHeart, toggledItems }) =>
                                     <FaHeart  /> 
                                 ) : (
                                     <FaRegHeart />
-
                                 )}
                             </div>
                             <div className="w-full pr-1 text-[#333]">
-                                <h1 className="font-semibold py-4 text-gray-600 text-2xl cursor-pointer">{item.title}</h1>
+                                <Link to={`/${item.id}`}><h1 className="font-semibold py-4 text-gray-600 text-2xl cursor-pointer w-fit">{item.title}</h1></Link>
+                                {/* <h1 className="font-semibold py-4 text-gray-600 text-2xl cursor-pointer">{item.title}</h1> */}
                                 <p className="h-12 text-gray-600">{item.description}</p>
                                 <div className="flex justify-between items-center">
                                     <p className="text-green-600 font-medium text-2xl my-2">{item.price}₸</p>
-                                    {/* <div
-                                        className="bg-gray-600 rounded-full w-10 h-10 text-center font-medium text-white text-4xl cursor-pointer hover:scale-110 transition duration-500"
-                                        onClick={() => addToCart(item)}
-                                    >
-                                        +
-                                    </div> */}
                                     <div
                                         className="border border-gray-600 rounded-lg text-gray-600 text-lg px-4 py-2 cursor-pointer hover:bg-gray-600 hover:text-white transition duration-300"
                                         onClick={() => addToCart(item)}
                                     >
                                         В корзину
                                     </div>
+                                
                                 </div>
                             </div>
                         </div>
-                    
                     ))
                 ) : (
                     <p className="col-span-full text-center text-lg text-gray-500">Товары не найдены</p>

@@ -36,15 +36,15 @@ const Footer = () => {
                 <p className='cursor-pointer hover:opacity-80'>Доставка и оплата</p>
                 <p className='cursor-pointer hover:opacity-80'>Мы в соц. сетях</p>
                 <div className='flex space-x-2'>
-                  <p><FaInstagram className='text-4xl p-1.5 border rounded-full cursor-pointer hover:bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045] hover:text-white'/></p>
-                  <p><FaYoutube className='text-4xl p-1.5 border rounded-full cursor-pointer hover:bg-[#FF0000] hover:text-white' /></p>
-                  <p><FaTelegramPlane className='text-4xl p-1.5 border rounded-full cursor-pointer hover:bg-[#229ED9] hover:text-white'/></p>
-                  <p><FaTiktok className='text-4xl p-1.5 border rounded-full cursor-pointer hover:bg-black hover:text-white' /></p>
-                  <p><FaFacebookF className='text-4xl p-1.5 border rounded-full cursor-pointer hover:bg-[#3b5998] hover:text-white' /></p>
+                  <p><FaInstagram className='text-4xl p-1.5 border rounded-full cursor-pointer transition duration-150 hover:bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045] hover:text-white'/></p>
+                  <p><FaYoutube className='text-4xl p-1.5 border rounded-full cursor-pointer transition duration-150 hover:bg-[#FF0000] hover:text-white' /></p>
+                  <p><FaTelegramPlane className='text-4xl p-1.5 border rounded-full cursor-pointer transition duration-150 hover:bg-[#229ED9] hover:text-white'/></p>
+                  <p><FaTiktok className='text-4xl p-1.5 border rounded-full cursor-pointer transition duration-150 hover:bg-black hover:text-white' /></p>
+                  <p><FaFacebookF className='text-4xl p-1.5 border rounded-full cursor-pointer transition duration-150 hover:bg-[#3b5998] hover:text-white' /></p>
                 </div>
               </li>
               <li className='space-y-5'>
-                <p className='font-semibold cursor-pointer hover:opacity-80'>Режим работы call-центрa </p>
+                <p className='font-semibold cursor-pointer hover:opacity-80'>Режим работы call-центрa</p>
                 <p className='cursor-pointer hover:opacity-80'>ежедневно с 11:00 до 00:00</p>
                 <p className='font-semibold cursor-pointer hover:opacity-80'>Доставка заказов</p>
                 <p className='cursor-pointer hover:opacity-80'>ежедневно с 9:00 до 23:00</p>
