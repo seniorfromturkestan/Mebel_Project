@@ -8,6 +8,7 @@ import AboutUs from './components/AboutUs';
 import Basket from './components/Basket';
 import ChatToggle from './components/Chat';
 import ItemDetail from './components/ItemDetail';
+import BottomNav from './components/BottomNav';
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -78,6 +79,8 @@ function App() {
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/basket" element={<Basket cart={cart} removeFromCart={removeFromCart} />} />
       </Routes>
+      <BottomNav />
+
       
       <Footer />
     </div>

@@ -8,8 +8,6 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
 
-
-
 const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
     const [cartOpen, setCartOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);

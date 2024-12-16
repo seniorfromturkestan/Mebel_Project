@@ -46,7 +46,7 @@ const Items = ({ items, addToCart, searchQuery, clickedHeart, toggledItems }) =>
                     filteredItem.map((item) => (
                         <div key={item.id} className="w-full overflow-hidden relative">
                             <img
-                                className="w-full h-[200px] sm:h-[250px] lg:h-[300px] object-cover brightness-90 hover:scale-105 hover:brightness-100 transition duration-500 cursor-pointer"
+                                className="w-full h-[200px] sm:h-[250px] lg:h-[300px] object-cover brightness-90 mb-2 hover:scale-105 hover:brightness-100 transition duration-500 cursor-pointer"
                                 src={item.img}
                                 alt={item.title}
                             />
@@ -57,8 +57,8 @@ const Items = ({ items, addToCart, searchQuery, clickedHeart, toggledItems }) =>
                                     <FaRegHeart />
                                 )}
                             </div>
-                            <div className="w-full pr-1 text-[#333]">
-                                <Link to={`/${item.id}`}><h1 className="font-semibold py-4 text-gray-600 text-xl sm:text-2xl cursor-pointer w-fit">{item.title}</h1></Link>
+                            <div className="w-full pr-1 text-[#333] space-y-3">
+                                <Link to={`/${item.id}`} className="font-semibold py-4 text-gray-600 text-xl sm:text-2xl cursor-pointer w-fit">{item.title}</Link>
                                 <p className="h-12 text-gray-600 text-sm sm:text-base">{item.description}</p>
                                 <div className="flex justify-between items-center">
                                     <p className="text-green-600 font-medium text-xl sm:text-2xl my-2">{item.price}₸</p>
