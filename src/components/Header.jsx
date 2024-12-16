@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaCartShopping, FaHeart, FaUser, FaBars, FaTrash } from 'react-icons/fa6';
 import { FaTimes } from 'react-icons/fa'
 import { Link, useLocation } from 'react-router-dom';
@@ -14,7 +14,32 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
     const [searchInput, setSearchInput] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [showDropdown, setShowDropdown] = useState(false);
+    const [isHeaderVisible, setIsHeaderVisible] = useState(true); // State to control header visibility
     const location = useLocation();
+
+    let lastScrollY = 0; // Variable to store the last scroll position
+
+    useEffect(() => {
+        // Function to handle scroll event
+        const handleScroll = () => {
+            if (window.scrollY > lastScrollY) {
+                // If scrolling down, hide the header
+                setIsHeaderVisible(false);
+            } else {
+                // If scrolling up, show the header
+                setIsHeaderVisible(true);
+            }
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+            lastScrollY = window.scrollY; // Update last scroll position
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        // Cleanup the event listener
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     const handleMouseEnter = () => {
         setCartOpen(true);
@@ -50,7 +75,7 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
     };
 
     return (
-        <div className="w-full bg-white shadow-md fixed z-20 h-20 lg:h-24 top-0">
+        <div className={`w-full bg-white shadow-md fixed z-20 h-20 lg:h-24 top-0 transition-transform duration-300 ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'}`}>
             <div className="wrapper">
                 <header className="relative w-full px-3 md:px-0" onMouseLeave={handleMouseLeave}>
                     <div className="flex lg:justify-between items-center bg-white pt-5">
@@ -60,18 +85,11 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                                 {menuOpen ? <FaTimes className='mr-10 transition duration-500' /> : <FaBars /> } 
                             </button>
                             <MobileMenu isOpen={menuOpen} toggleMenu={toggleMenu} />
-
                         </div>
-
 
                         <Link to="/" className="text-2xl mr-auto lg:mr-0 font-bold text-gray-600">FurniLand</Link>
                         <FaMapMarkerAlt className='md:hidden text-2xl text-gray-600' />
                         <FaPhoneAlt className='md:hidden text-2xl text-gray-600 ml-5' />
-
-
-
-
-                       
 
                         <div className="hidden md:block w-1/3 relative">
                             <input
@@ -182,10 +200,6 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                     </div>
                 </header>
                 <MobileMenu/>
-
-
-               
-             
             </div>
         </div>
     );
