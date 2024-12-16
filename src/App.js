@@ -56,7 +56,7 @@ function App() {
 };
   
   return (
-    <div>
+    <div className='bg-white'>
       <Header  items={items} cart={cart} removeFromCart={removeFromCart} setSearchQuery={setSearchQuery} />
       <ChatToggle/>
       
