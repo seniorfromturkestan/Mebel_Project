@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 const ItemDetail = ({ items, addToCart }) => {
     const { id } = useParams(); 
     const item = items.find(item => item.id === parseInt(id)); 
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         <div className="wrapper">

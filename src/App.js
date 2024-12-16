@@ -57,7 +57,7 @@ function App() {
   
   return (
     <div>
-      <Header cart={cart} removeFromCart={removeFromCart} setSearchQuery={setSearchQuery} />
+      <Header  items={items} cart={cart} removeFromCart={removeFromCart} setSearchQuery={setSearchQuery} />
       <ChatToggle/>
       
       <Routes>
