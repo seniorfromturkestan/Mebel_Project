@@ -52,12 +52,12 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
     };
 
     return (
-        <div className="w-full bg-white shadow-md fixed z-20 h-20 sm:h-24 top-0">
+        <div className="w-full bg-white shadow-md fixed z-20 h-20 lg:h-24 top-0">
             <div className="wrapper">
                 <header className="relative w-full px-3 md:px-0" onMouseLeave={handleMouseLeave}>
-                    <div className="flex md:justify-between items-center bg-white pt-5">
+                    <div className="flex lg:justify-between items-center bg-white pt-5">
 
-                        <div className="sm:hidden flex items-center mr-auto md:mr-0">
+                        <div className="lg:hidden flex items-center mr-auto lg:mr-0">
                             <button onClick={toggleMenu} className="text-4xl text-gray-600 z-50 focus:outline-none">
                                 {menuOpen ? <FaTimes className='mr-10 transition duration-500' /> : <FaBars /> } 
                             </button>
@@ -66,16 +66,16 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                         </div>
 
 
-                        <Link to="/" className="text-2xl mr-auto sm:mr-0 font-bold text-gray-600">FurniLand</Link>
-                        <FaMapMarkerAlt className='md:hidden text-3xl text-gray-600' />
-                        <FaPhoneAlt className='md:hidden text-3xl text-gray-600 ml-5' />
+                        <Link to="/" className="text-2xl mr-auto lg:mr-0 font-bold text-gray-600">FurniLand</Link>
+                        <FaMapMarkerAlt className='md:hidden text-2xl text-gray-600' />
+                        <FaPhoneAlt className='md:hidden text-2xl text-gray-600 ml-5' />
 
 
 
 
                        
 
-                        <div className="hidden sm:block w-1/3 relative">
+                        <div className="hidden md:block w-1/3 relative">
                             <input
                                 type="text"
                                 placeholder="Поиск товаров"
@@ -113,7 +113,7 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                         </div>
 
                         {/* Icons */}
-                        <ul className="hidden sm:flex items-center">
+                        <ul className="hidden lg:flex items-center">
                             <Link to="/basket">
                                 <FaCartShopping
                                     onMouseEnter={handleMouseEnter}
