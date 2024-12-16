@@ -80,5 +80,13 @@ export const items = [
         description: 'Элегантный стул с современным дизайном и комфортом.',
         category: 'chairs',
         price: '54900'
-    }
+    },
+    {
+        id: 10,
+        title: 'Cтул Vertical Terra',
+        img: elem7,
+        description: 'Элегантный стул с современным дизайном и комфортом.',
+        category: 'table',
+        price: '29900'
+    },
 ];

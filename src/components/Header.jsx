@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
-import { FaCartShopping, FaTrash, FaHeart, FaUser } from 'react-icons/fa6';
+import { FaCartShopping, FaHeart, FaUser, FaBars, FaTrash } from 'react-icons/fa6';
+import { FaTimes } from 'react-icons/fa'
 import { Link, useLocation } from 'react-router-dom';
 import { IoSearchOutline } from "react-icons/io5";
+import MobileMenu from './MobileMenu';
+import { FaPhoneAlt } from "react-icons/fa";
+import { FaMapMarkerAlt } from "react-icons/fa";
+
+
+
 
 const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
     const [cartOpen, setCartOpen] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
     const [searchInput, setSearchInput] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [showDropdown, setShowDropdown] = useState(false);
@@ -27,7 +35,7 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                 item.title.toLowerCase().includes(query.toLowerCase())
             );
             setSearchResults(filteredResults);
-            setShowDropdown(true); 
+            setShowDropdown(true);
         } else {
             setSearchResults([]);
             setShowDropdown(false);
@@ -39,14 +47,35 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
         setShowDropdown(false);
     };
 
-    return (
-        <div className="w-full bg-white shadow-md fixed z-20 h-24 top-0">
-            <div className="wrapper">
-                <header className="relative w-full" onMouseLeave={handleMouseLeave}>
-                    <div className="flex justify-between items-center bg-white fixed w-[1280px] top-6">
-                        <Link to="/" className="text-2xl font-bold text-gray-600">FurniLand</Link>
+    const toggleMenu = () => {
+        setMenuOpen(!menuOpen);
+    };
 
-                        <div className="w-1/3 relative">
+    return (
+        <div className="w-full bg-white shadow-md fixed z-20 h-20 sm:h-24 top-0">
+            <div className="wrapper">
+                <header className="relative w-full px-3 md:px-0" onMouseLeave={handleMouseLeave}>
+                    <div className="flex md:justify-between items-center bg-white pt-5">
+
+                        <div className="sm:hidden flex items-center mr-auto md:mr-0">
+                            <button onClick={toggleMenu} className="text-4xl text-gray-600 z-50 focus:outline-none">
+                                {menuOpen ? <FaTimes className='mr-10 transition duration-500' /> : <FaBars /> } 
+                            </button>
+                            <MobileMenu isOpen={menuOpen} toggleMenu={toggleMenu} />
+
+                        </div>
+
+
+                        <Link to="/" className="text-2xl mr-auto sm:mr-0 font-bold text-gray-600">FurniLand</Link>
+                        <FaMapMarkerAlt className='md:hidden text-3xl text-gray-600' />
+                        <FaPhoneAlt className='md:hidden text-3xl text-gray-600 ml-5' />
+
+
+
+
+                       
+
+                        <div className="hidden sm:block w-1/3 relative">
                             <input
                                 type="text"
                                 placeholder="Поиск товаров"
@@ -60,14 +89,14 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                             />
                             <button
                                 onClick={handleSearchClick}
-                                className="absolute top-1 right-1 px-4 py-2 bg-gray-600 text-white rounded-lg  hover:opacity-80  transition duration-300"
+                                className="absolute top-1 right-1 px-4 py-2 bg-gray-600 text-white rounded-lg hover:opacity-80 transition duration-300"
                             >
                                 Найти
                             </button>
                             {showDropdown && searchResults.length > 0 && (
                                 <ul className="absolute top-full w-full bg-white border shadow-md max-h-72 overflow-y-auto z-10">
                                     {searchResults.map((item) => (
-                                        <Link                              
+                                        <Link
                                             to={`/${item.id}`}
                                             key={item.id}
                                             className="p-3 hover:bg-gray-100 cursor-pointer flex items-center space-x-4"
@@ -81,12 +110,10 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                                     ))}
                                 </ul>
                             )}
-
-                        
                         </div>
-                    
 
-                        <ul className="flex items-center">
+                        {/* Icons */}
+                        <ul className="hidden sm:flex items-center">
                             <Link to="/basket">
                                 <FaCartShopping
                                     onMouseEnter={handleMouseEnter}
@@ -112,6 +139,7 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                             </li>
                         </ul>
 
+                        {/* Cart Preview */}
                         <div
                             className={`absolute top-12 py-3 right-0 w-[450px] min-h-[100px] bg-white shadow-[0px_0px_9px_2px_rgba(0,_0,_0,_0.1)] z-10 transform transition-all duration-300 ${
                                 cartOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
@@ -155,6 +183,11 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                         </div>
                     </div>
                 </header>
+                <MobileMenu/>
+
+
+               
+             
             </div>
         </div>
     );

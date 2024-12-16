@@ -9,7 +9,7 @@ const ChatToggle = () => {
     };
 
     return (
-        <div className="fixed bottom-5 right-5 flex items-center space-x-3">
+        <div className="fixed bottom-5 right-5 flex items-center space-x-3 z-10">
             {isOpen && (
                 <a
                     href="https://wa.me/"
@@ -23,10 +23,19 @@ const ChatToggle = () => {
 
             <button
                 onClick={toggleChat}
-                className={`flex items-center justify-center w-16 h-16 rounded-full shadow-lg transition-all duration-300 
+                className={`flex items-center justify-center w-12 h-12 lg:w-16 lg:h-16 rounded-full shadow-lg transition-all duration-300 
                     ${isOpen ? 'bg-red-500 text-white' : 'bg-gray-600 text-white'}`}
             >
-                {isOpen ? <FaTimes size={35} /> : <FaCommentDots size={35} />}
+                {isOpen ? 
+                        <div className="text-[30px] lg:text-[35px]">
+                              <FaTimes /> 
+
+                        </div>
+                        : 
+                        <div className='text-[30px] lg:text-[35px]'>
+                            <FaCommentDots />
+                        </div>
+                }
             </button>
         </div>
     );

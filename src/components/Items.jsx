@@ -9,6 +9,7 @@ const categoryNames = {
     tables: 'Столы',
     shelves: 'Полки',
     sofa: 'Диваны',
+    table:'Кресло'
 };
 
 const Items = ({ items, addToCart, searchQuery, clickedHeart, toggledItems }) => {
@@ -28,47 +29,45 @@ const Items = ({ items, addToCart, searchQuery, clickedHeart, toggledItems }) =>
         <div className="wrapper">
             <About/>
 
-            <div className="flex space-x-3 my-5">
+            <div className="flex md:flex-wrap space-x-3 my-5 pl-3 md:pl-0 overflow-x-auto max-h-12 md:max-h-20 scrollbar-hide">
                 {categories.map((category) => (
                     <button
                         key={category}
                         onClick={() => setSelectedCategory(category)}
                         className={`px-4 py-2 rounded-lg ${selectedCategory === category ? 'bg-gray-600 text-white' : 'bg-gray-200 text-black'} transition duration-300`}
                     >
-                        {category === 'all' ? 'Все товары' : categoryNames[category] || category}
+                        {category === 'all' ? 'Все' : categoryNames[category] || category}
                     </button>
                 ))}
             </div>
 
-            <main className="flex flex-wrap justify-start gap-6">
+            <main className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-3 md:px-0">
                 {filteredItem.length > 0 ? (
                     filteredItem.map((item) => (
-                        <div key={item.id} className="w-[32%] overflow-hidden relative">
+                        <div key={item.id} className="w-full overflow-hidden relative">
                             <img
-                                className="w-full h-[300px] object-cover brightness-90 hover:scale-105 hover:brightness-100 transition duration-500 cursor-pointer"
+                                className="w-full h-[200px] sm:h-[250px] lg:h-[300px] object-cover brightness-90 hover:scale-105 hover:brightness-100 transition duration-500 cursor-pointer"
                                 src={item.img}
                                 alt={item.title}
                             />
-                            <div onClick={()=> clickedHeart(item.id)} className="text-3xl absolute right-3 bottom-28 text-gray-600 cursor-pointer hover:opacity-80 transition duration-200" >
+                            <div onClick={() => clickedHeart(item.id)} className="text-2xl md:text-3xl absolute right-3 bottom-28 text-gray-600 cursor-pointer hover:opacity-80 transition duration-200">
                                 {toggledItems[item.id] ? (
-                                    <FaHeart  /> 
+                                    <FaHeart /> 
                                 ) : (
                                     <FaRegHeart />
                                 )}
                             </div>
                             <div className="w-full pr-1 text-[#333]">
-                                <Link to={`/${item.id}`}><h1 className="font-semibold py-4 text-gray-600 text-2xl cursor-pointer w-fit">{item.title}</h1></Link>
-                                {/* <h1 className="font-semibold py-4 text-gray-600 text-2xl cursor-pointer">{item.title}</h1> */}
-                                <p className="h-12 text-gray-600">{item.description}</p>
+                                <Link to={`/${item.id}`}><h1 className="font-semibold py-4 text-gray-600 text-xl sm:text-2xl cursor-pointer w-fit">{item.title}</h1></Link>
+                                <p className="h-12 text-gray-600 text-sm sm:text-base">{item.description}</p>
                                 <div className="flex justify-between items-center">
-                                    <p className="text-green-600 font-medium text-2xl my-2">{item.price}₸</p>
+                                    <p className="text-green-600 font-medium text-xl sm:text-2xl my-2">{item.price}₸</p>
                                     <div
-                                        className="border border-gray-600 rounded-lg text-gray-600 text-lg px-4 py-2 cursor-pointer hover:bg-gray-600 hover:text-white transition duration-300"
+                                        className="border border-gray-600 rounded-lg text-gray-600 text-sm sm:text-lg px-3 sm:px-4 py-2 cursor-pointer hover:bg-gray-600 hover:text-white transition duration-300"
                                         onClick={() => addToCart(item)}
                                     >
                                         В корзину
                                     </div>
-                                
                                 </div>
                             </div>
                         </div>
