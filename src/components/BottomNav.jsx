@@ -12,7 +12,7 @@ const BottomNav = () => {
           className={`flex flex-col items-center ${active === 'home' ? 'text-red-600 ' : ''} `} 
           onClick={() => setActive('home')}
         >
-          <FaHouse size={25} />
+          <FaHouse size={24} />
           <span className="text-xs mt-1">Home</span>
         </button>
 
@@ -20,7 +20,7 @@ const BottomNav = () => {
           className={`flex flex-col items-center ${active === 'favorites' ? 'text-red-600 ' : ''} `} 
           onClick={() => setActive('favorites')}
         >
-          <FaHeart size={25} />
+          <FaHeart size={24} />
           <span className="text-xs mt-1">Избранное</span>
         </button>
 
@@ -28,7 +28,7 @@ const BottomNav = () => {
           className={`flex flex-col items-center ${active === 'cart' ? 'text-red-600' : ''}`} 
           onClick={() => setActive('cart')}
         >
-          <FaCartShopping size={25} />
+          <FaCartShopping size={24} />
           <span className="text-xs mt-2">Корзина</span>
         </button>
 
@@ -36,7 +36,7 @@ const BottomNav = () => {
           className={`flex flex-col items-center ${active === 'showrooms' ? 'text-red-600 ' : ''} `} 
           onClick={() => setActive('showrooms')}
         >
-          <FaStore size={25} />
+          <FaStore size={24} />
           <span className="text-xs mt-1">Шоурумы</span>
         </button>
 
@@ -44,7 +44,7 @@ const BottomNav = () => {
           className={`flex flex-col items-center ${active === 'login' ? 'text-red-600 ' : ''} `} 
           onClick={() => setActive('login')}
         >
-          <FaUser size={25} />
+          <FaUser size={24} />
           <span className="text-xs mt-1">Войти</span>
         </button>
 

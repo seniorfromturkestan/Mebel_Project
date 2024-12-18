@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { FaCartShopping, FaHeart, FaUser, FaBars, FaTrash } from 'react-icons/fa6';
-import { FaTimes } from 'react-icons/fa'
+import { FaTimes } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 import { IoSearchOutline } from "react-icons/io5";
 import MobileMenu from './MobileMenu';
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaMapMarkerAlt } from "react-icons/fa";
-
 
 const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
     const [cartOpen, setCartOpen] = useState(false);
@@ -14,32 +13,43 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
     const [searchInput, setSearchInput] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [showDropdown, setShowDropdown] = useState(false);
-    const [isHeaderVisible, setIsHeaderVisible] = useState(true); // State to control header visibility
-    const location = useLocation();
+    const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-    let lastScrollY = 0; // Variable to store the last scroll position
+    const location = useLocation();
+    let lastScrollY = 0;
 
     useEffect(() => {
-        // Function to handle scroll event
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > lastScrollY) {
-                // If scrolling down, hide the header
-                setIsHeaderVisible(false);
-            } else {
-                // If scrolling up, show the header
-                setIsHeaderVisible(true);
+            if (windowWidth < 1024) { // Check if the screen is smaller than lg
+                if (window.scrollY > lastScrollY) {
+                    setIsHeaderVisible(false);
+                } else {
+                    setIsHeaderVisible(true);
+                }
+                // eslint-disable-next-line react-hooks/exhaustive-deps
+                lastScrollY = window.scrollY;
             }
-            // eslint-disable-next-line react-hooks/exhaustive-deps
-            lastScrollY = window.scrollY; // Update last scroll position
         };
 
         window.addEventListener('scroll', handleScroll);
 
-        // Cleanup the event listener
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, []);
+    }, [windowWidth]);
 
     const handleMouseEnter = () => {
         setCartOpen(true);
@@ -75,7 +85,8 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
     };
 
     return (
-        <div className={`w-full bg-white shadow-md fixed z-20 h-20 lg:h-24 top-0 transition-transform duration-300 ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+        <div className={`w-full bg-white shadow-md fixed z-20 h-20 lg:h-24 top-0 transition-transform duration-300 
+                        ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'}`}>
             <div className="wrapper">
                 <header className="relative w-full px-3 md:px-0" onMouseLeave={handleMouseLeave}>
                     <div className="flex lg:justify-between items-center bg-white pt-5">
@@ -128,7 +139,6 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                             )}
                         </div>
 
-                        {/* Icons */}
                         <ul className="hidden lg:flex items-center">
                             <Link to="/basket">
                                 <FaCartShopping
@@ -155,9 +165,8 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                             </li>
                         </ul>
 
-                        {/* Cart Preview */}
                         <div
-                            className={`absolute top-12 py-3 right-0 w-[450px] min-h-[100px] bg-white shadow-[0px_0px_9px_2px_rgba(0,_0,_0,_0.1)] z-10 transform transition-all duration-300 ${
+                            className={`absolute top-16 py-3 right-0 w-[450px] min-h-[100px] bg-white shadow-[0px_0px_9px_2px_rgba(0,_0,_0,_0.1)] z-10 transform transition-all duration-300 ${
                                 cartOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
                             }`}
                             onMouseEnter={handleMouseEnter}
