@@ -33,23 +33,34 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
 
     useEffect(() => {
         const handleScroll = () => {
-            if (windowWidth < 1024) { // Check if the screen is smaller than lg
-                if (window.scrollY > lastScrollY) {
-                    setIsHeaderVisible(false);
-                } else {
-                    setIsHeaderVisible(true);
-                }
-                // eslint-disable-next-line react-hooks/exhaustive-deps
-                lastScrollY = window.scrollY;
+            // Проверка на ширину экрана
+            if (window.innerWidth >= 1024) {
+                return; // На больших экранах не скрываем хедер
             }
+    
+            if (window.scrollY === 0) {
+                // Если достигнут верх страницы, всегда показываем хедер
+                setIsHeaderVisible(true);
+            } else if (window.scrollY > lastScrollY) {
+                // Если скроллим вниз, скрываем хедер
+                setIsHeaderVisible(false);
+            } else {
+                // Если скроллим вверх, показываем хедер
+                setIsHeaderVisible(true);
+            }
+    
+            // Обновляем позицию
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+            lastScrollY = window.scrollY;
         };
-
+    
         window.addEventListener('scroll', handleScroll);
-
+    
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, [windowWidth]);
+    
 
     const handleMouseEnter = () => {
         setCartOpen(true);
