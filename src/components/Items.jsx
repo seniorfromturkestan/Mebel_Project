@@ -29,7 +29,7 @@ const Items = ({ items, addToCart, searchQuery, clickedHeart, toggledItems }) =>
         <div className="wrapper">
             <About/>
 
-            <div className="flex md:flex-wrap space-x-3 my-5 pl-3 md:pl-0 overflow-x-auto max-h-12 md:max-h-20 scrollbar-hide">
+            <div className="flex md:flex-wrap space-x-3 my-5 pl-3 xl:pl-0 overflow-x-auto max-h-12 md:max-h-20 scrollbar-hide">
                 {categories.map((category) => (
                     <button
                         key={category}
@@ -41,7 +41,7 @@ const Items = ({ items, addToCart, searchQuery, clickedHeart, toggledItems }) =>
                 ))}
             </div>
 
-            <main className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-3 md:px-0">
+            <main className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-3 xl:px-0">
                 {filteredItem.length > 0 ? (
                     filteredItem.map((item) => (
                         <div key={item.id} className="w-full overflow-hidden relative">

@@ -33,23 +33,18 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
 
     useEffect(() => {
         const handleScroll = () => {
-            // Проверка на ширину экрана
             if (window.innerWidth >= 1024) {
-                return; // На больших экранах не скрываем хедер
+                return; 
             }
     
             if (window.scrollY === 0) {
-                // Если достигнут верх страницы, всегда показываем хедер
                 setIsHeaderVisible(true);
             } else if (window.scrollY > lastScrollY) {
-                // Если скроллим вниз, скрываем хедер
                 setIsHeaderVisible(false);
             } else {
-                // Если скроллим вверх, показываем хедер
                 setIsHeaderVisible(true);
             }
     
-            // Обновляем позицию
             // eslint-disable-next-line react-hooks/exhaustive-deps
             lastScrollY = window.scrollY;
         };
@@ -99,7 +94,7 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
         <div className={`w-full bg-white shadow-md fixed z-20 h-20 lg:h-24 top-0 transition-transform duration-300 
                         ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'}`}>
             <div className="wrapper">
-                <header className="relative w-full px-3 md:px-0" onMouseLeave={handleMouseLeave}>
+                <header className="relative w-full px-3 xl:px-0" onMouseLeave={handleMouseLeave}>
                     <div className="flex lg:justify-between items-center bg-white pt-5">
 
                         <div className="lg:hidden flex items-center mr-auto lg:mr-0">
@@ -110,10 +105,10 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                         </div>
 
                         <Link to="/" className="text-2xl mr-auto lg:mr-0 font-bold text-gray-600">FurniLand</Link>
-                        <FaMapMarkerAlt className='md:hidden text-2xl text-gray-600' />
-                        <FaPhoneAlt className='md:hidden text-2xl text-gray-600 ml-5' />
+                        <FaMapMarkerAlt className='lg:hidden md:order-1 text-2xl text-gray-600' />
+                        <FaPhoneAlt className='lg:hidden md:order-2 text-2xl text-gray-600 ml-5' />
 
-                        <div className="hidden md:block w-1/3 relative">
+                        <div className="hidden md:block mr-10 lg:mr-0 w-2/5 relative">
                             <input
                                 type="text"
                                 placeholder="Поиск товаров"
@@ -137,12 +132,12 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                                         <Link
                                             to={`/${item.id}`}
                                             key={item.id}
-                                            className="p-3 hover:bg-gray-100 cursor-pointer flex items-center space-x-4"
+                                            className="p-3 hover:bg-gray-100 cursor-pointer flex items-center space-x-5 border-b"
                                         >
-                                            <img src={item.img} alt={item.title} className="w-20 h-14 object-cover" />
-                                            <div>
-                                                <p className="font-medium">{item.title}</p>
-                                                <p className="text-green-600 font-medium">{item.price}₸</p>
+                                            <img src={item.img} alt={item.title} className="w-32 h-20 object-cover" />
+                                            <div className='space-y-2'>
+                                                <p className="font-medium text-xl">{item.title}</p>
+                                                <p className="text-green-600 font-medium text-xl">{item.price}₸</p>
                                             </div>
                                         </Link>
                                     ))}

@@ -58,7 +58,7 @@ const About = () => {
 
   return (
     <div className="wrapper">
-      <div className="relative w-full max-w-[1280px] mx-auto mt-24 md:mt-32 px-3 md:px-0">
+      <div className="relative w-full max-w-[1280px] mx-auto mt-24 lg:mt-28 px-3 xl:px-0">
         <div className="relative items-center justify-center">
           <button
             className="absolute left-0 top-[45%] z-10  text-white text-4xl"
@@ -66,7 +66,7 @@ const About = () => {
           >
             <FaAngleLeft />
           </button>
-          <div className="w-full h-[320px] md:h-[500px] relative overflow-hidden overflow-x-scroll scrollbar-hide">
+          <div className="w-full h-[320px] md:h-[400px] lg:h-[500px] relative overflow-hidden overflow-x-scroll scrollbar-hide">
             {slides.map((slide, index) => (
               <div
                 key={index}
@@ -80,7 +80,7 @@ const About = () => {
                 style={{ backgroundImage: `url(${slide.image})` }}
               >
                 <div className="absolute w-full h-full"></div>
-                <span className="absolute text-white font-semibold w-[300px] md:w-[400px] top-[80px] left-[50px] text-2xl md:text-5xl z-10">
+                <span className="absolute text-white font-semibold w-[300px] md:w-[400px] top-[80px] left-[50px] text-2xl md:text-4xl xl:text-5xl z-10">
                   {slide.title}
                 </span>
                 <span className="absolute text-white font-light w-[300px] top-[150px] md:top-[230px] left-[50px] text-lg z-10">
