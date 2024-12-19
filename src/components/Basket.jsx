@@ -32,7 +32,7 @@ const Basket = ({cart, removeFromCart}) => {
                 <div className='flex flex-col justify-center items-center space-y-10 mt-10 mb-20'>
                         <p>В вашей корзине пока нет товаров</p>
                     
-                    <svg xmlns="http://www.w3.org/2000/svg" width="440" height="23" viewBox="0 0 440 234" fill="none">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="440" height="234" viewBox="0 0 440 234" fill="none">
                     <path d="M370.263 58.9814L354.103 233.475H358.864L379.074 58.9814H370.263Z" stroke="#767676" strokeMiterlimit="10"/>
                     <path d="M422.305 58.9814L438.465 233.475H433.704L413.486 58.9814H422.305Z" stroke="#767676" strokeMiterlimit="10"/>
                     <path d="M426.781 173.661H365.789L366.327 169.018H426.251L426.781 173.661Z" stroke="#767676" strokeMiterlimit="10"/>

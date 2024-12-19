@@ -5,7 +5,7 @@ const BottomNav = () => {
   const [active, setActive] = useState('home'); 
 
   return (
-    <div className="lg:hidden fixed bottom-0 left-0 w-full bg-white shadow-lg border-t border-gray-200 z-50">
+    <div className="lg:hidden fixed bottom-0 left-0 w-full bg-white shadow-lg border-t border-gray-200 z-20">
       <div className="flex justify-around items-center py-3 text-gray-600">
         
         <button 
