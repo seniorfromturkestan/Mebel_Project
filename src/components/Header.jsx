@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { FaCartShopping, FaHeart, FaUser, FaBars, FaTrash } from 'react-icons/fa6';
-import { FaTimes } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 import { IoSearchOutline } from "react-icons/io5";
 import MobileMenu from './MobileMenu';
@@ -55,6 +54,17 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, [windowWidth]);
+
+    useEffect(() => {
+        if (menuOpen) {
+            document.body.style.overflow = "hidden"; // Запрет скролла
+        } else {
+            document.body.style.overflow = ""; // Возврат скролла
+        }
+        return () => {
+            document.body.style.overflow = ""; // Очистка на размонтировании
+        };
+    }, [menuOpen]);
     
 
     const handleMouseEnter = () => {
@@ -98,10 +108,23 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                     <div className="flex lg:justify-between items-center bg-white pt-5">
 
                         <div className="lg:hidden flex items-center mr-auto lg:mr-0">
-                            <button onClick={toggleMenu} className="text-4xl text-gray-600 z-50 focus:outline-none">
-                                {menuOpen ? <FaTimes className='mr-10 transition duration-500' /> : <FaBars /> } 
-                            </button>
-                            <MobileMenu isOpen={menuOpen} toggleMenu={toggleMenu} />
+                        <button
+                            onClick={toggleMenu}
+                            className={`text-4xl text-gray-600 z-20 focus:outline-none  ${
+                                menuOpen ? "opacity-0" : "opacity-100"
+                            }`}
+                        >
+                            <FaBars />
+                        </button>
+
+                            <MobileMenu
+                                isOpen={menuOpen}
+                                toggleMenu={toggleMenu}
+                                searchInput={searchInput}
+                                handleSearchClick={handleSearchClick}
+                                handleSearchInput={handleSearchInput}
+                            />
+
                         </div>
 
                         <Link to="/" className="text-2xl mr-auto lg:mr-0 font-bold text-gray-600">FurniLand</Link>

@@ -50,7 +50,7 @@ const Items = ({ items, addToCart, searchQuery, clickedHeart, toggledItems }) =>
                                 src={item.img}
                                 alt={item.title}
                             />
-                            <div onClick={() => clickedHeart(item.id)} className="text-2xl md:text-3xl absolute right-3 bottom-28 text-gray-600 cursor-pointer hover:opacity-80 transition duration-200">
+                            <div onClick={() => clickedHeart(item.id)} className="text-2xl md:text-3xl absolute right-3 bottom-26 lg:bottom-28 text-gray-600 cursor-pointer hover:opacity-80 transition duration-200">
                                 {toggledItems[item.id] ? (
                                     <FaHeart /> 
                                 ) : (
@@ -59,11 +59,11 @@ const Items = ({ items, addToCart, searchQuery, clickedHeart, toggledItems }) =>
                             </div>
                             <div className="w-full pr-1 text-[#333] space-y-3">
                                 <Link to={`/${item.id}`} className="font-semibold py-4 text-gray-600 text-xl sm:text-2xl cursor-pointer w-fit">{item.title}</Link>
-                                <p className="h-12 text-gray-600 text-sm sm:text-base">{item.description}</p>
+                                <p className="h-6 lg:h-12 text-gray-600 text-sm sm:text-base">{item.description}</p>
                                 <div className="flex justify-between items-center">
                                     <p className="text-green-600 font-medium text-xl sm:text-2xl my-2">{item.price}₸</p>
                                     <div
-                                        className="border border-gray-600 rounded-lg text-gray-600 text-sm sm:text-lg px-3 sm:px-4 py-2 cursor-pointer hover:bg-gray-600 hover:text-white transition duration-300"
+                                        className="border border-gray-600 rounded-lg text-gray-600 text-base sm:text-lg px-3 sm:px-4 py-2 cursor-pointer hover:bg-gray-600 hover:text-white transition duration-300"
                                         onClick={() => addToCart(item)}
                                     >
                                         В корзину

@@ -1,38 +1,54 @@
-import { TiDelete } from "react-icons/ti";
-
-
-const Basket = ({cart, removeFromCart}) => {
-  return (
-    <div className="wrapper text-gray-600">
-            <h1 className="text-2xl my-6 font-bold text-center mt-32 ">Оформление заказа</h1>
-            {cart.length > 0 ? (
-                <ul>
-                {cart.map((item) => (
-                    <li key={item.id} className="border-b py-4 px-4 flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                        <img src={item.img} className="w-80 h-48 object-center object-cover" alt="/" />
-                        <div className="flex flex-col space-y-5">
-                        <span className="font-semibold text-2xl">
-                            {item.title} 
-                            {item.quantity > 1 && (
-                            <span className="text-md ml-2">x{item.quantity}</span>
-                            )}
+const Basket = ({ cart, removeFromCart }) => {
+    return (
+      <div className="wrapper text-gray-600 px-4">
+        <h1 className="text-xl md:text-2xl font-bold text-center mt-28 mb-4 md:mt-32">
+          Оформление заказа
+        </h1>
+        {cart.length > 0 ? (
+          <ul className="space-y-6">
+            {cart.map((item) => (
+              <li
+                key={item.id}
+                className="w-full border-b py-4 flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0"
+              >
+                <div className="flex flex-col w-full md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-4">
+                  <img
+                    src={item.img}
+                    className="w-[400px] md:w-48 lg:w-64 h-52 object-cover"
+                    alt={item.title}
+                  />
+                  <div className="flex flex-col space-y-2">
+                    <span className="font-semibold text-xl">
+                      {item.title}
+                      {item.quantity > 1 && (
+                        <span className="text-sm md:text-md ml-2">
+                          x{item.quantity}
                         </span>
-                        <span className='text-xl'>{item.description}</span>
-                        <span className="text-green-600 font-medium text-2xl">{item.price * item.quantity}₸</span>
-                        </div>
-                    </div>
-                    <TiDelete className="text-5xl cursor-pointer hover:scale-110 transition" 
-                            onClick={() => removeFromCart(item.id)}
-                    />
-                    </li>
-                ))}
-                </ul>
-            ) : (
-                <div className='flex flex-col justify-center items-center space-y-10 mt-10 mb-20'>
-                        <p>В вашей корзине пока нет товаров</p>
-                    
-                    <svg xmlns="http://www.w3.org/2000/svg" width="440" height="234" viewBox="0 0 440 234" fill="none">
+                      )}
+                    </span>
+                    <span className="text-sm md:text-base">{item.description}</span>
+                    <span className="text-green-600 font-medium text-xl">
+                      {item.price * item.quantity}₸
+                    </span>
+                  </div>
+                </div>
+                <div className="w-full md:w-auto flex justify-end md:justify-start">
+                  <button
+                    className="border border-gray-600 rounded-lg text-gray-600 text-base sm:text-lg px-3 sm:px-4 py-2 cursor-pointer hover:bg-gray-600 hover:text-white transition duration-300 ml-auto md:ml-0"
+                    onClick={() => removeFromCart(item.id)}
+                  >
+                    Удалить
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className="flex flex-col justify-center items-center space-y-4 mt-10 mb-20">
+            <p className="text-center text-sm md:text-base">
+              В вашей корзине пока нет товаров
+            </p>
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-[350px] md:w-[500px]" viewBox="0 0 440 234" fill="none">
                     <path d="M370.263 58.9814L354.103 233.475H358.864L379.074 58.9814H370.263Z" stroke="#767676" strokeMiterlimit="10"/>
                     <path d="M422.305 58.9814L438.465 233.475H433.704L413.486 58.9814H422.305Z" stroke="#767676" strokeMiterlimit="10"/>
                     <path d="M426.781 173.661H365.789L366.327 169.018H426.251L426.781 173.661Z" stroke="#767676" strokeMiterlimit="10"/>
@@ -55,15 +71,12 @@ const Basket = ({cart, removeFromCart}) => {
                     <path d="M219.924 20.425V24.9453L250.645 24.9453V20.425H219.924Z" stroke="#767676" strokeMiterlimit="10"/>
                     <path d="M219.949 80.6018V85.1221H250.669V80.6018H219.949Z" stroke="#767676" strokeMiterlimit="10"/>
                     <path d="M219.906 140.67V145.19H250.626V140.67H219.906Z" stroke="#767676" strokeMiterlimit="10"/>
-                    </svg>
-                </div>
-            
-            )}
-        
-
-        
-    </div>
-  )
-}
-
-export default Basket
+            </svg>
+          </div>
+        )}
+      </div>
+    );
+  };
+  
+  export default Basket;
+  

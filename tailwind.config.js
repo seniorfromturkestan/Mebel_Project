@@ -7,6 +7,9 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
 
   ],
+  safelist: [
+    'text-red-600',
+  ],
   theme: {
     extend: {
       dropShadow: {
