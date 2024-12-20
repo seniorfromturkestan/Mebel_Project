@@ -9,6 +9,9 @@ import Basket from './components/Basket';
 import ChatToggle from './components/Chat';
 import ItemDetail from './components/ItemDetail';
 import BottomNav from './components/BottomNav';
+import ShowRooms from './components/ShowRooms';
+import UserProfile from './components/UserProfile';
+
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -78,6 +81,12 @@ function App() {
 
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/basket" element={<Basket cart={cart} removeFromCart={removeFromCart} />} />
+        <Route path="/showrooms" element={<ShowRooms />} />
+        <Route path="/profile" element={<UserProfile/>} />
+
+
+
+
       </Routes>
       <BottomNav />
 

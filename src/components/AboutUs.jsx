@@ -3,8 +3,12 @@ import React from 'react'
 const AboutUs = () => {
   return (
     <div className="wrapper">
+        <div className='px-3 lg:px-0'>
 
-      <div className='mt-32'>Избранные</div>
+          <h1 className='mt-24 lg:mt-32'>Избранные</h1>
+          <p>Страница еще дорабатывается</p>
+        </div>
+
     </div>
   )
 }
