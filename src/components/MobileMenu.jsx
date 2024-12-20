@@ -2,6 +2,7 @@ import { FaTimes, FaMapMarkerAlt} from 'react-icons/fa';
 import { FaUser } from 'react-icons/fa6'
 
 import kz from '../img/kz.png'
+import { Link } from 'react-router-dom';
 
 
 const MobileMenu = ({ isOpen, toggleMenu, searchInput, handleSearchClick, handleSearchInput}) => {
@@ -25,8 +26,11 @@ const MobileMenu = ({ isOpen, toggleMenu, searchInput, handleSearchClick, handle
                 >
                     <FaTimes />
                 </button>
+
+                <Link to="/" className="absolute top-3 text-2xl p-3 lg:mr-0 font-bold text-gray-600">FurniLand</Link>
+
                 
-                <div className="md:hidden relative w-4/5 m-3">
+                <div className="md:hidden relative w-11/12 m-3 mt-20">
                     <input
                         type="text"
                         placeholder="Поиск товаров"
@@ -48,7 +52,7 @@ const MobileMenu = ({ isOpen, toggleMenu, searchInput, handleSearchClick, handle
                     </div>
                 </div>
 
-                <nav className="flex flex-col mt-10 space-y-5 text-lg font-medium px-3">
+                <nav className="flex flex-col mt-6 space-y-5 text-lg font-medium px-3">
                     <div className="hover:text-gray-600 transition duration-200">
                         Каталог
                     </div>

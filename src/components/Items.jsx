@@ -11,7 +11,6 @@ const categoryNames = {
     sofa: 'Диваны',
     table:'Кресло'
 };
-
 const Items = ({ items, addToCart, searchQuery, clickedHeart, toggledItems }) => {
     const [selectedCategory, setSelectedCategory] = useState('all');
 

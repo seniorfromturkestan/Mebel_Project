@@ -57,12 +57,12 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
 
     useEffect(() => {
         if (menuOpen) {
-            document.body.style.overflow = "hidden"; // Запрет скролла
+            document.body.style.overflow = "hidden";
         } else {
-            document.body.style.overflow = ""; // Возврат скролла
+            document.body.style.overflow = ""; 
         }
         return () => {
-            document.body.style.overflow = ""; // Очистка на размонтировании
+            document.body.style.overflow = ""; 
         };
     }, [menuOpen]);
     
