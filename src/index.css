@@ -23,5 +23,11 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+.loader-container {
+  background-color: white;
+}
+.loader {
+  background-color: transparent;
+}
 
 
