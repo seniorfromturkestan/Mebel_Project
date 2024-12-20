@@ -67,7 +67,7 @@ const MobileMenu = ({ isOpen, toggleMenu, searchInput, handleSearchClick, handle
                     </div>
                 </nav>
 
-                <div className="absolute bottom-0 bg-gray-100 w-full h-1/4">
+                <div className="absolute bottom-0 bg-gray-100 w-full h-1/3">
                     <ul className="pl-3 pt-10 space-y-4">
                         <li className="flex items-center space-x-4">
                             <img src={kz} alt="kz" className="w-6" /> 
