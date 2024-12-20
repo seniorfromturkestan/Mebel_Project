@@ -22,9 +22,7 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
         };
-
         window.addEventListener('resize', handleResize);
-
         return () => {
             window.removeEventListener('resize', handleResize);
         };
@@ -35,7 +33,6 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
             if (window.innerWidth >= 1024) {
                 return; 
             }
-    
             if (window.scrollY === 0) {
                 setIsHeaderVisible(true);
             } else if (window.scrollY > lastScrollY) {
@@ -47,9 +44,7 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
             // eslint-disable-next-line react-hooks/exhaustive-deps
             lastScrollY = window.scrollY;
         };
-    
         window.addEventListener('scroll', handleScroll);
-    
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
@@ -90,12 +85,10 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
             setShowDropdown(false);
         }
     };
-
     const handleSearchClick = () => {
         setSearchQuery(searchInput);
         setShowDropdown(false);
     };
-
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
@@ -108,14 +101,14 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                     <div className="flex lg:justify-between items-center bg-white pt-5">
 
                         <div className="lg:hidden flex items-center mr-auto lg:mr-0">
-                        <button
-                            onClick={toggleMenu}
-                            className={`text-4xl text-gray-600 z-20 focus:outline-none  ${
-                                menuOpen ? "opacity-0" : "opacity-100"
-                            }`}
-                        >
-                            <FaBars />
-                        </button>
+                            <button
+                                onClick={toggleMenu}
+                                className={`text-4xl text-gray-600 z-20 focus:outline-none  ${
+                                    menuOpen ? "opacity-0" : "opacity-100"
+                                }`}
+                            >
+                                <FaBars />
+                            </button>
 
                             <MobileMenu
                                 isOpen={menuOpen}
