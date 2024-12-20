@@ -43,13 +43,15 @@ const Items = ({ items, addToCart, searchQuery, clickedHeart, toggledItems }) =>
             <main className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-3 xl:px-0">
                 {filteredItem.length > 0 ? (
                     filteredItem.map((item) => (
-                        <div key={item.id} className="w-full overflow-hidden relative">
-                            <img
-                                className="w-full h-[200px] sm:h-[250px] lg:h-[300px] object-cover brightness-90 mb-2 hover:scale-105 hover:brightness-100 transition duration-500 cursor-pointer"
-                                src={item.img}
-                                alt={item.title}
-                            />
-                            <div onClick={() => clickedHeart(item.id)} className="text-2xl md:text-3xl absolute right-3 bottom-26 lg:bottom-28 text-gray-600 cursor-pointer hover:opacity-80 transition duration-200">
+                        <div key={item.id} className="w-full relative">
+                            <div className="border h-[230px] sm:h-[290px] lg:h-[300px] overflow-hidden mb-3">
+                                <img
+                                    className="w-full h-[230px] sm:h-[290px] lg:h-[300px] object-cover brightness-90 mb-2 hover:scale-105 hover:brightness-100 transition duration-500 cursor-pointer"
+                                    src={item.img}
+                                    alt={item.title}
+                                />
+                            </div>
+                            <div onClick={() => clickedHeart(item.id)} className="text-2xl md:text-3xl absolute right-3 bottom-30 text-gray-600 cursor-pointer hover:opacity-80 transition duration-200">
                                 {toggledItems[item.id] ? (
                                     <FaHeart /> 
                                 ) : (

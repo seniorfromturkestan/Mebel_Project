@@ -133,11 +133,14 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                                 className="w-full p-3 px-10 border rounded-lg shadow-md focus:outline-none"
                             />
                             <IoSearchOutline
-                                className='absolute top-3 left-3 text-2xl text-gray-400 cursor-pointer'
+                                className="absolute top-3 left-3 text-2xl text-gray-400 cursor-pointer"
                                 onClick={handleSearchClick}
                             />
                             <button
-                                onClick={handleSearchClick}
+                                onClick={() => {
+                                    handleSearchClick();
+                                    setShowDropdown(false); // Закрываем dropdown при нажатии
+                                }}
                                 className="absolute top-1 right-1 px-4 py-2 bg-gray-600 text-white rounded-lg hover:opacity-80 transition duration-300"
                             >
                                 Найти
@@ -149,9 +152,10 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                                             to={`/${item.id}`}
                                             key={item.id}
                                             className="p-3 hover:bg-gray-100 cursor-pointer flex items-center space-x-5 border-b"
+                                            onClick={() => setShowDropdown(false)} // Закрываем dropdown при выборе товара
                                         >
                                             <img src={item.img} alt={item.title} className="w-32 h-20 object-cover" />
-                                            <div className='space-y-2'>
+                                            <div className="space-y-2">
                                                 <p className="font-medium text-xl">{item.title}</p>
                                                 <p className="text-green-600 font-medium text-xl">{item.price}₸</p>
                                             </div>
@@ -160,6 +164,7 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                                 </ul>
                             )}
                         </div>
+
 
                         <ul className="hidden lg:flex items-center">
                             <Link to="/basket">
@@ -182,9 +187,15 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                                 }`} />
                             </Link>
 
-                            <li className="ml-5 cursor-pointer hover:opacity-80 transition duration-200">
-                                <FaUser className='text-2xl text-gray-600' />
-                            </li>
+                            <Link to="/profile" className="ml-5 cursor-pointer hover:opacity-80 transition duration-200">
+                                   
+                                <FaUser className={`text-2xl text-gray-600 ${
+                                    location.pathname === '/profile'
+                                    ? 'text-red-600'
+                                    : 'text-gray-600'
+
+                                }`} />
+                            </Link>
                         </ul>
 
                         <div

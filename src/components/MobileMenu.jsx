@@ -10,7 +10,7 @@ const MobileMenu = ({ isOpen, toggleMenu, searchInput, handleSearchClick, handle
     return (
         <div>
             <div
-                className={`absolute top-0 left-0 right-0 bg-white opacity-50 z-10 min-h-[150vh] transition-opacity duration-300 ${
+                className={`absolute top-0 left-0 right-0 bg-black opacity-50 z-10 min-h-[150vh] transition-opacity duration-300 ${
                     isOpen ? "opacity-50 block" : "opacity-0 hidden"
                 }`}
                 onClick={toggleMenu}
@@ -52,7 +52,7 @@ const MobileMenu = ({ isOpen, toggleMenu, searchInput, handleSearchClick, handle
                     </div>
                 </div>
 
-                <nav className="flex flex-col mt-6 space-y-5 text-lg font-medium px-3">
+                <nav className="flex flex-col mt-6 space-y-5 text-lg md:mt-20 font-medium px-3">
                     <div className="hover:text-gray-600 transition duration-200">
                         Каталог
                     </div>
