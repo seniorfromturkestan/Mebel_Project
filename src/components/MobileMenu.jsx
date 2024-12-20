@@ -1,4 +1,4 @@
-import { FaTimes, FaMapMarkerAlt, FaSearch } from 'react-icons/fa';
+import { FaTimes, FaMapMarkerAlt} from 'react-icons/fa';
 import { FaUser } from 'react-icons/fa6'
 
 import kz from '../img/kz.png'
@@ -35,14 +35,16 @@ const MobileMenu = ({ isOpen, toggleMenu, searchInput, handleSearchClick, handle
                         className="w-full p-3 border rounded-lg shadow-md focus:outline-none"
                     />
             
-                    <div className="absolute top-1/2 right-1 text-2xl transform -translate-y-1/2 px-3 py-2 text-gray-600 rounded-lg hover:opacity-80 transition duration-300"
+                    <div className="absolute top-1/2 right-1 text-lg transform -translate-y-1/2 px-3 py-2 text-gray-600 rounded-lg hover:opacity-80 transition duration-300"
+                        enterKeyHint='enter'
                           onClick={()=>{
                             handleSearchClick();
                             toggleMenu()
                         }}
                     
-                    > 
-                        <FaSearch/>
+                    >
+                        Найти
+                        {/* <FaSearch/> */}
                     </div>
                 </div>
 
