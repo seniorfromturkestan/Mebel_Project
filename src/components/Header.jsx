@@ -139,7 +139,7 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                             <button
                                 onClick={() => {
                                     handleSearchClick();
-                                    setShowDropdown(false); // Закрываем dropdown при нажатии
+                                    setShowDropdown(false); 
                                 }}
                                 className="absolute top-1 right-1 px-4 py-2 bg-gray-600 text-white rounded-lg hover:opacity-80 transition duration-300"
                             >
@@ -152,7 +152,7 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                                             to={`/${item.id}`}
                                             key={item.id}
                                             className="p-3 hover:bg-gray-100 cursor-pointer flex items-center space-x-5 border-b"
-                                            onClick={() => setShowDropdown(false)} // Закрываем dropdown при выборе товара
+                                            onClick={() => setShowDropdown(false)}
                                         >
                                             <img src={item.img} alt={item.title} className="w-32 h-20 object-cover" />
                                             <div className="space-y-2">
@@ -209,30 +209,33 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                             {cart.length > 0 ? (
                                 <ul className="mt-3 max-h-[300px] overflow-y-auto">
                                     {cart.map((item) => (
-                                        <Link
-                                            to={`/${item.id}`}
-                                            key={item.id}
-                                            className="border-b py-4 px-4 flex items-center justify-between hover:bg-gray-100 ease-in-out duration-200"
-                                        >
-                                            <div className="flex items-center space-x-4">
-                                                <img src={item.img} className="w-32 h-20 object-cover" alt={item.title} />
-                                                <div className="flex flex-col space-y-2">
-                                                    <span className="font-medium text-lg">
-                                                        {item.title}
-                                                        {item.quantity > 1 && (
-                                                            <span className="text-md ml-2">x{item.quantity}</span>
-                                                        )}
-                                                    </span>
-                                                    <span className="text-green-600 font-medium text-xl">
-                                                        {item.price * item.quantity}₸
-                                                    </span>
+                                        <li className="border-b py-4 px-4 flex items-center justify-between hover:bg-gray-100 ease-in-out duration-200"
+>
+                                            <Link
+                                                to={`/${item.id}`}
+                                                key={item.id}
+                                            >
+                                                <div className="flex items-center space-x-4">
+                                                    <img src={item.img} className="w-32 h-20 object-cover" alt={item.title} />
+                                                    <div className="flex flex-col space-y-2">
+                                                        <span className="font-medium text-lg">
+                                                            {item.title}
+                                                            {item.quantity > 1 && (
+                                                                <span className="text-md ml-2">x{item.quantity}</span>
+                                                            )}
+                                                        </span>
+                                                        <span className="text-green-600 font-medium text-xl">
+                                                            {item.price * item.quantity}₸
+                                                        </span>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                
+                                            </Link>
                                             <FaTrash
-                                                className="text-xl cursor-pointer hover:scale-110 transition text-red-600"
-                                                onClick={() => removeFromCart(item.id)}
+                                                    className="text-xl cursor-pointer hover:scale-110 transition text-red-600"
+                                                    onClick={() => removeFromCart(item.id)}
                                             />
-                                        </Link>
+                                        </li>
                                     ))}
                                 </ul>
                             ) : (

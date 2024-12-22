@@ -12,7 +12,7 @@ const ChatToggle = () => {
         <div className="fixed bottom-20 lg:bottom-5 lg:right-5 right-3 flex items-center space-x-3 z-30">
             {isOpen && (
                 <a
-                    href="https://wa.me/"
+                    href="https://wa.me/+77002355409"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center w-12 h-12 bg-green-500 text-white rounded-full shadow-lg hover:scale-110 transition duration-300"

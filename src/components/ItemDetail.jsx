@@ -23,7 +23,7 @@ const ItemDetail = ({ items, addToCart }) => {
                     <p className="text-3xl text-green-600 font-medium mt-4">{item.price}₸</p>
 
                     <div
-                        className="border border-gray-600 w-full sm:w-64 rounded-lg mt-7 text-gray-600 text-center text-lg px-4 py-2 cursor-pointer hover:bg-gray-600 hover:text-white transition duration-300"
+                        className="border border-gray-600 w-full sm:w-64 rounded-lg mt-7 text-gray-600 text-center text-lg px-4 py-2 cursor-pointer hover:bg-gray-600 hover:text-white transition duration-300 active:bg-white active:text-gray-600"
                         onClick={() => addToCart(item)}
                     >
                         В корзину

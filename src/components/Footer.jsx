@@ -9,8 +9,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 text-center md:text-left gap-8 text-gray-600 mt-10">
           <div className="space-y-4 text-lg">
             <p className="font-semibold cursor-pointer hover:opacity-80">Контактная информация</p>
-            <p className="cursor-pointer hover:opacity-80">+7 (727) 310-37-59</p>
-            <p className="cursor-pointer hover:opacity-80">mebel@mail.ru</p>
+            <p className="cursor-pointer hover:opacity-80">+7 (700) 235-54-09</p>
+            <p className="cursor-pointer hover:opacity-80">raazor.raazor@mail.ru</p>
             <p className="cursor-pointer hover:opacity-80">Задать вопрос</p>
             <p className="cursor-pointer hover:opacity-80">Контакты</p>
           </div>

@@ -64,7 +64,7 @@ const Items = ({ items, addToCart, searchQuery, clickedHeart, toggledItems }) =>
                                 <div className="flex justify-between items-center">
                                     <p className="text-green-600 font-medium text-xl sm:text-2xl my-2">{item.price}₸</p>
                                     <div
-                                        className="border border-gray-600 rounded-lg text-gray-600 text-base sm:text-lg px-3 sm:px-4 py-2 cursor-pointer hover:bg-gray-600 hover:text-white transition duration-300"
+                                        className="border border-gray-600 rounded-lg text-gray-600 text-base sm:text-lg px-3 sm:px-4 py-2 cursor-pointer hover:bg-gray-600 hover:text-white transition duration-200 active:bg-white active:text-gray-600"
                                         onClick={() => addToCart(item)}
                                     >
                                         В корзину
