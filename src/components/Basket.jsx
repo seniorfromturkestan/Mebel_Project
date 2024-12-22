@@ -1,6 +1,9 @@
+
+
+
 const Basket = ({ cart, removeFromCart }) => {
     return (
-      <div className="wrapper text-gray-600 px-4">
+      <div className="wrapper text-gray-600 px-3">
         <h1 className="text-xl md:text-2xl font-bold text-center mt-28 mb-4 md:mt-32">
           Оформление заказа
         </h1>
@@ -11,13 +14,13 @@ const Basket = ({ cart, removeFromCart }) => {
                 key={item.id}
                 className="w-full border-b py-4 flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0"
               >
-                <div className="flex flex-col w-full md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-4">
+                <div className="flex flex-col w-full md:flex-row  md:items-center space-y-4 md:space-y-0 md:space-x-4">
                   <img
                     src={item.img}
-                    className="w-[400px] md:w-48 lg:w-64 h-52 object-cover"
+                    className="w-full md:w-80 lg:w-96 h-60 sm:h-72 md:h-56 object-cover object-top"
                     alt={item.title}
                   />
-                  <div className="flex flex-col space-y-2">
+                  <div className="flex flex-col space-y-2 float-left">
                     <span className="font-semibold text-xl">
                       {item.title}
                       {item.quantity > 1 && (
@@ -26,20 +29,27 @@ const Basket = ({ cart, removeFromCart }) => {
                         </span>
                       )}
                     </span>
-                    <span className="text-sm md:text-base">{item.description}</span>
-                    <span className="text-green-600 font-medium text-xl">
+                    <span className="text-sm md:text-base mr-4">{item.description}</span>
+                    <span className="text-green-600 hidden md:block font-medium text-xl md:text-2xl">
                       {item.price * item.quantity}₸
                     </span>
+                    
                   </div>
+                   
                 </div>
                 <div className="w-full md:w-auto flex justify-end md:justify-start">
-                  <button
-                    className="border border-gray-600 rounded-lg text-gray-600 text-base sm:text-lg px-3 sm:px-4 py-2 cursor-pointer hover:bg-gray-600 hover:text-white transition duration-300 ml-auto md:ml-0"
-                    onClick={() => removeFromCart(item.id)}
-                  >
-                    Удалить
-                  </button>
+                      <span className="text-green-600 md:hidden font-medium text-xl sm:text-2xl">
+                        {item.price * item.quantity}₸
+                      </span>
+                      <button
+                        className="border border-gray-600 rounded-lg text-gray-600 text-base sm:text-lg px-3 sm:px-4 py-2 cursor-pointer hover:bg-gray-600 hover:text-white transition duration-300 ml-auto md:ml-0"
+                        onClick={() => removeFromCart(item.id)}
+                      >
+                        Удалить
+                      </button>
+                   
                 </div>
+                
               </li>
             ))}
           </ul>

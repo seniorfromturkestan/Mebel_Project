@@ -156,7 +156,7 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                                         >
                                             <img src={item.img} alt={item.title} className="w-32 h-20 object-cover" />
                                             <div className="space-y-2">
-                                                <p className="font-medium text-xl">{item.title}</p>
+                                                <p className="font-medium text-lg">{item.title}</p>
                                                 <p className="text-green-600 font-medium text-xl">{item.price}₸</p>
                                             </div>
                                         </Link>

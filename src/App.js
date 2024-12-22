@@ -16,7 +16,12 @@ import UserProfile from './components/UserProfile';
 function App() {
   const [cart, setCart] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [toggledItems, setToggledItems] = useState({});
+  const [favorites, setFavorites] = useState([]);
+  const [toggledItems, setToggledItems] = useState(() => {
+    const saved = localStorage.getItem('favorites');
+    return saved ? JSON.parse(saved) : {};
+});
+
   
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem('cart'));
@@ -32,6 +37,23 @@ function App() {
       localStorage.removeItem('cart');
     }
   }, [cart]);
+
+  useEffect(() => {
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    if (savedFavorites.length > 0) {
+      setFavorites(savedFavorites);
+    }
+  }, []);
+
+  useEffect(() => {
+    const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    setFavorites(storedFavorites);
+  }, []);
+  
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }, [favorites]);
+  
 
   const addToCart = (item) => {
     setCart((prevCart) => {
@@ -52,12 +74,33 @@ function App() {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
 
+  const removeFromFavorites = (id) => {
+    const updatedFavorites = favorites.filter((favId) => favId !== id);
+    setFavorites(updatedFavorites);
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites)); // Обновляем localStorage
+  };
+
   const clickedHeart = (id) => {
-    setToggledItems((prev) => ({
-        ...prev,
-        [id]: !prev[id], 
-    }));
-};
+    setToggledItems((prev) => {
+        const updated = { ...prev };
+        if (updated[id]) {
+            delete updated[id]; // Удаляем из избранного
+        } else {
+            updated[id] = true; // Добавляем в избранное
+        }
+        localStorage.setItem('favorites', JSON.stringify(updated)); // Обновляем localStorage
+        return updated;
+    });
+
+
+    setFavorites((prevFavorites) => {
+      if (prevFavorites.includes(id)) {
+        return prevFavorites.filter((favId) => favId !== id);
+      } else {
+        return [...prevFavorites, id];
+      }
+    });
+  };
   
   return (
     <div className='bg-white'>
@@ -72,14 +115,15 @@ function App() {
               items={items}
               addToCart={addToCart}
               searchQuery={searchQuery} 
-              toggledItems={toggledItems}
               clickedHeart={clickedHeart}
+              favorites={favorites}
+              toggledItems={toggledItems}
             />
           }
         />
         <Route path="/:id" element={<ItemDetail items={items} addToCart={addToCart} />} />
 
-        <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/aboutus" element={<AboutUs  items={items} favorites={favorites} removeFromFavorites={removeFromFavorites} />} />
         <Route path="/basket" element={<Basket cart={cart} removeFromCart={removeFromCart} />} />
         <Route path="/showrooms" element={<ShowRooms />} />
         <Route path="/profile" element={<UserProfile/>} />

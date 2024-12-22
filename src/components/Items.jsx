@@ -11,17 +11,17 @@ const categoryNames = {
     sofa: 'Диваны',
     table:'Кресло'
 };
-const Items = ({ items, addToCart, searchQuery, clickedHeart, toggledItems }) => {
+const Items = ({ items, addToCart, searchQuery = '', clickedHeart, toggledItems = {}, favorites }) => {
     const [selectedCategory, setSelectedCategory] = useState('all');
 
     const filteredItems = selectedCategory === 'all'
         ? items
         : items.filter(item => item.category === selectedCategory);
 
-    const categories = ['all', ...new Set(items.map(item => item.category))];
+    const categories = ['all', ...new Set(items?.map(item => item.category))];
 
     const filteredItem = filteredItems.filter(item =>
-        item.title.toLowerCase().includes(searchQuery.toLowerCase())
+        item.title?.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     return (
@@ -48,16 +48,16 @@ const Items = ({ items, addToCart, searchQuery, clickedHeart, toggledItems }) =>
                                 <img
                                     className="w-full h-[230px] sm:h-[290px] lg:h-[300px] object-cover brightness-90 mb-2 hover:scale-105 hover:brightness-100 transition duration-500 cursor-pointer"
                                     src={item.img}
-                                    alt={item.title}
+                                    alt={item.title || 'Изображение'}
                                 />
+                                <div
+                                    onClick={() => clickedHeart(item.id)}
+                                    className="text-2xl md:text-3xl absolute right-3 bottom-30 text-gray-600 cursor-pointer hover:opacity-80 transition duration-200"
+                                >
+                                    {toggledItems?.[item.id] ? <FaHeart /> : <FaRegHeart />}
+                                </div>
                             </div>
-                            <div onClick={() => clickedHeart(item.id)} className="text-2xl md:text-3xl absolute right-3 bottom-30 text-gray-600 cursor-pointer hover:opacity-80 transition duration-200">
-                                {toggledItems[item.id] ? (
-                                    <FaHeart /> 
-                                ) : (
-                                    <FaRegHeart />
-                                )}
-                            </div>
+
                             <div className="w-full pr-1 text-[#333] space-y-3">
                                 <Link to={`/${item.id}`} className="font-semibold py-4 text-gray-600 text-xl sm:text-2xl cursor-pointer w-fit">{item.title}</Link>
                                 <p className="h-6 lg:h-12 text-gray-600 text-sm sm:text-base">{item.description}</p>
@@ -77,9 +77,7 @@ const Items = ({ items, addToCart, searchQuery, clickedHeart, toggledItems }) =>
                     <p className="col-span-full text-center text-lg text-gray-500">Товары не найдены</p>
                 )}
             </main>
-
         </div>
     );
 };
-
-export default Items;
+export default Items
