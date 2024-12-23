@@ -21,10 +21,10 @@ const ItemDetail = ({ items, addToCart, clickedHeart }) => {
                 <div className="w-full lg:w-3/5 flex flex-col">
                     <h1 className="text-2xl sm:text-3xl font-semibold py-2">{item.title}</h1>
                     <p className="text-base sm:text-lg text-gray-600">{item.mafia}</p>
-                    <div className='flex items-center justify-between mt-4 xl:mt-20'>
-                        <p className="text-3xl text-green-600 font-medium my-4">{item.price}₸</p>
-                        <div className="space-x-1">
-                            <Button onclick={() => clickedHeart(item.id)}>Добавить в избранное</Button>
+                    <div className='sm:flex items-center sm:justify-between mt-4 xl:mt-20'>
+                        <p className="text-2xl lg:text-3xl text-green-600 font-medium my-4">{item.price}₸</p>
+                        <div className="flex space-x-1 justify-between">
+                            <Button onclick={() => clickedHeart(item.id)}>В избранное</Button>
                             <Button onclick={() => addToCart(item)}>В корзину</Button>
                         </div>
                     </div>
