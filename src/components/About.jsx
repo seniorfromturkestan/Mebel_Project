@@ -90,9 +90,7 @@ const About = () => {
             ))}
           </div>
           <button
-            // className="absolute right-0 top-[45%] z-10 bg-gray-700 text-white rounded-full p-2  focus:outline-none"
             className="absolute right-0 top-[45%] z-10  text-white text-4xl"
-
             onClick={nextSlide}
           >
             <FaAngleRight />

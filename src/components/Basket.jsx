@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
+import Button from "./Button";
 
 
 
 const Basket = ({ cart, removeFromCart }) => {
     return (
-      <div className="wrapper text-gray-600 px-3 lg:px-0">
-        <h1 className="text-xl md:text-2xl font-bold text-center mt-28 mb-4 md:mt-32">
-          Оформление заказа
-        </h1>
+      <div className="wrapper text-gray-600 px-3 xl:px-0">
+          <h1 className="text-xl md:text-2xl font-bold text-center mt-28 mb-4 md:mt-32">
+            Оформление заказа
+          </h1>
         {cart.length > 0 ? (
           <ul>
             {cart.map((item) => (
@@ -19,7 +20,7 @@ const Basket = ({ cart, removeFromCart }) => {
                   <Link to={`/${item.id}`}>
                     <img
                       src={item.img}
-                      className="w-full rounded-lg shadow-lg md:w-80 lg:w-96 h-60 sm:h-72 md:h-56 object-cover object-top"
+                      className="w-full rounded-lg shadow-lg md:w-80 lg:w-96 h-60 sm:h-72 md:h-56 object-cover object-center"
                       alt={item.title}
                     />
                   </Link>
@@ -33,26 +34,20 @@ const Basket = ({ cart, removeFromCart }) => {
                       )}
                     </span>
                     <span className="text-sm md:text-base mr-4">{item.description}</span>
-                    <span className="text-green-600 hidden md:block font-medium text-xl md:text-2xl">
+                    <span className="text-green-600 hidden md:block font-medium text-2xl">
                       {item.price * item.quantity}₸
                     </span>
-                    
                   </div>
-                   
                 </div>
                 <div className="w-full md:w-auto flex justify-end md:justify-start">
-                      <span className="text-green-600 md:hidden font-medium text-xl sm:text-2xl">
+                      <span className="text-green-600 md:hidden font-medium text-2xl">
                         {item.price * item.quantity}₸
                       </span>
-                      <button
-                        className="border border-gray-600 rounded-lg text-gray-600 text-base sm:text-lg px-3 sm:px-4 py-2 cursor-pointer hover:bg-gray-600 hover:text-white transition duration-300 ml-auto md:ml-0"
-                        onClick={() => removeFromCart(item.id)}
-                      >
-                        Удалить
-                      </button>
-                   
+                      <div className="ml-auto md:w-52 flex md:flex-col justify-between md:justify-end">
+                        <Button onclick={() => removeFromCart(item.id)}>Удалить</Button>
+                      </div>
+
                 </div>
-                
               </li>
             ))}
           </ul>

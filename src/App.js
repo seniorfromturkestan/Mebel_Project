@@ -38,21 +38,7 @@ function App() {
     }
   }, [cart]);
 
-  useEffect(() => {
-    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    if (savedFavorites.length > 0) {
-      setFavorites(savedFavorites);
-    }
-  }, []);
-
-  useEffect(() => {
-    const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    setFavorites(storedFavorites);
-  }, []);
-  
-  useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-  }, [favorites]);
+ 
   
 
   const addToCart = (item) => {
@@ -77,18 +63,18 @@ function App() {
   const removeFromFavorites = (id) => {
     const updatedFavorites = favorites.filter((favId) => favId !== id);
     setFavorites(updatedFavorites);
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites)); // Обновляем localStorage
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
   };
 
   const clickedHeart = (id) => {
     setToggledItems((prev) => {
         const updated = { ...prev };
         if (updated[id]) {
-            delete updated[id]; // Удаляем из избранного
+            delete updated[id]; 
         } else {
-            updated[id] = true; // Добавляем в избранное
+            updated[id] = true;
         }
-        localStorage.setItem('favorites', JSON.stringify(updated)); // Обновляем localStorage
+        localStorage.setItem('favorites', JSON.stringify(updated)); 
         return updated;
     });
 
@@ -131,6 +117,7 @@ function App() {
                 <ItemDetail 
                   items={items} 
                   addToCart={addToCart} 
+                  clickedHeart={clickedHeart}
                 />
               } 
         />

@@ -3,6 +3,7 @@ import About from "./About";
 import { FaRegHeart } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
+import Button from "./Button";
 
 const categoryNames = {
     chairs: 'Стулья',
@@ -11,7 +12,7 @@ const categoryNames = {
     sofa: 'Диваны',
     table:'Кресло'
 };
-const Items = ({ items, addToCart, searchQuery = '', clickedHeart, toggledItems = {}, favorites }) => {
+const Items = ({ items, addToCart, searchQuery = '', clickedHeart, toggledItems = {} }) => {
     const [selectedCategory, setSelectedCategory] = useState('all');
 
     const filteredItems = selectedCategory === 'all'
@@ -39,11 +40,10 @@ const Items = ({ items, addToCart, searchQuery = '', clickedHeart, toggledItems 
                     </button>
                 ))}
             </div>
-
             <main className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-3 xl:px-0">
                 {filteredItem.length > 0 ? (
                     filteredItem.map((item) => (
-                        <div key={item.id} className="w-full relative">
+                        <div key={item.id} className="w-full relative mb-3">
                             <div className="rounded-lg shadow-lg h-[230px] sm:h-[290px] lg:h-[300px] overflow-hidden mb-3">
                                 <Link to={`/${item.id}`}>
                                     <img
@@ -59,17 +59,13 @@ const Items = ({ items, addToCart, searchQuery = '', clickedHeart, toggledItems 
                                     {toggledItems?.[item.id] ? <FaHeart /> : <FaRegHeart />}
                                 </div>
                             </div>
-
                             <div className="w-full pr-1 text-[#333] space-y-3 pt-1">
                                 <Link to={`/${item.id}`} className="font-semibold py-4 text-gray-600 text-xl sm:text-2xl cursor-pointer w-fit">{item.title}</Link>
-                                <p className="h-6 lg:h-12 text-gray-600 text-sm sm:text-base">{item.description}</p>
+                                <p className="h-6 lg:h-10 text-gray-600 text-sm sm:text-base">{item.description}</p>
                                 <div className="flex justify-between items-center">
-                                    <p className="text-green-600 font-medium text-xl sm:text-2xl my-2">{item.price}₸</p>
-                                    <div
-                                        className="border border-gray-600 rounded-lg text-gray-600 text-base sm:text-lg px-3 sm:px-4 py-2 cursor-pointer hover:bg-gray-600 hover:text-white transition duration-200 active:bg-white active:text-gray-600"
-                                        onClick={() => addToCart(item)}
-                                    >
-                                        В корзину
+                                    <p className="text-green-600 font-medium text-2xl">{item.price}₸</p>
+                                    <div className="text-base sm:text-lg">
+                                        <Button onclick={() => addToCart(item)}>В корзину</Button>
                                     </div>
                                 </div>
                             </div>

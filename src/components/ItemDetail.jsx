@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import Button from './Button';
 
-const ItemDetail = ({ items, addToCart }) => {
+const ItemDetail = ({ items, addToCart, clickedHeart }) => {
     const { id } = useParams(); 
     const item = items.find(item => item.id === parseInt(id)); 
 
@@ -10,23 +11,22 @@ const ItemDetail = ({ items, addToCart }) => {
     }, []);
 
     return (
-        <div className="wrapper px-3 lg:px-0">
+        <div className="wrapper px-3 xl:px-0">
             <div className="mt-28 lg:mt-32 flex flex-col lg:flex-row items-center lg:items-start gap-6 lg:gap-10">
                 <img
                     src={item.img}
                     alt={item.title}
-                    className="w-full sm:w-4/5  h-[300px] sm:h-[400px] object-cover object-center shadow-md"
+                    className="w-full lg:w-4/5 rounded-lg h-[300px] sm:h-[400px] object-cover object-center shadow-lg"
                 />
                 <div className="w-full lg:w-3/5 flex flex-col">
                     <h1 className="text-2xl sm:text-3xl font-semibold py-2">{item.title}</h1>
                     <p className="text-base sm:text-lg text-gray-600">{item.mafia}</p>
-                    <p className="text-3xl text-green-600 font-medium mt-4">{item.price}₸</p>
-
-                    <div
-                        className="border border-gray-600 w-full sm:w-64 rounded-lg mt-7 text-gray-600 text-center text-lg px-4 py-2 cursor-pointer hover:bg-gray-600 hover:text-white transition duration-300 active:bg-white active:text-gray-600"
-                        onClick={() => addToCart(item)}
-                    >
-                        В корзину
+                    <div className='flex items-center justify-between mt-4 xl:mt-20'>
+                        <p className="text-3xl text-green-600 font-medium my-4">{item.price}₸</p>
+                        <div className="space-x-1">
+                            <Button onclick={() => clickedHeart(item.id)}>Добавить в избранное</Button>
+                            <Button onclick={() => addToCart(item)}>В корзину</Button>
+                        </div>
                     </div>
                 </div>
             </div>
