@@ -66,11 +66,11 @@ const About = () => {
           >
             <FaAngleLeft />
           </button>
-          <div className="w-full h-[320px] md:h-[400px] lg:h-[500px] relative overflow-hidden overflow-x-scroll scrollbar-hide">
+          <div className="w-full h-[320px] md:h-[400px] lg:h-[500px] rounded-xl  relative overflow-hidden overflow-x-scroll scrollbar-hide">
             {slides.map((slide, index) => (
               <div
                 key={index}
-                className={`absolute w-full h-full bg-cover bg-center bg-blend-multiply bg-[#bcbcbc] transition-transform duration-300 ${
+                className={`absolute w-full h-full bg-cover bg-center rounded-xl  bg-blend-multiply bg-[#bcbcbc] transition-transform duration-300 ${
                   index === currentIndex
                     ? 'translate-x-0'
                     : direction === 'right'

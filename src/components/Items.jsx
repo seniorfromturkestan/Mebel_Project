@@ -44,12 +44,14 @@ const Items = ({ items, addToCart, searchQuery = '', clickedHeart, toggledItems 
                 {filteredItem.length > 0 ? (
                     filteredItem.map((item) => (
                         <div key={item.id} className="w-full relative">
-                            <div className="border h-[230px] sm:h-[290px] lg:h-[300px] overflow-hidden mb-3">
-                                <img
-                                    className="w-full h-[230px] sm:h-[290px] lg:h-[300px] object-cover brightness-90 mb-2 hover:scale-105 hover:brightness-100 transition duration-500 cursor-pointer"
-                                    src={item.img}
-                                    alt={item.title || 'Изображение'}
-                                />
+                            <div className="rounded-lg shadow-lg h-[230px] sm:h-[290px] lg:h-[300px] overflow-hidden mb-3">
+                                <Link to={`/${item.id}`}>
+                                    <img
+                                        className="w-full h-[230px] sm:h-[290px] lg:h-[300px] object-cover brightness-90 mb-3 hover:scale-105 hover:brightness-100 transition duration-500 cursor-pointer"
+                                        src={item.img}
+                                        alt={item.title || 'Изображение'}
+                                    />
+                                </Link>
                                 <div
                                     onClick={() => clickedHeart(item.id)}
                                     className="text-2xl md:text-3xl absolute right-3 bottom-30 text-gray-600 cursor-pointer hover:opacity-80 transition duration-200"
@@ -58,7 +60,7 @@ const Items = ({ items, addToCart, searchQuery = '', clickedHeart, toggledItems 
                                 </div>
                             </div>
 
-                            <div className="w-full pr-1 text-[#333] space-y-3">
+                            <div className="w-full pr-1 text-[#333] space-y-3 pt-1">
                                 <Link to={`/${item.id}`} className="font-semibold py-4 text-gray-600 text-xl sm:text-2xl cursor-pointer w-fit">{item.title}</Link>
                                 <p className="h-6 lg:h-12 text-gray-600 text-sm sm:text-base">{item.description}</p>
                                 <div className="flex justify-between items-center">

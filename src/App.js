@@ -104,7 +104,11 @@ function App() {
   
   return (
     <div className='bg-white'>
-      <Header  items={items} cart={cart} removeFromCart={removeFromCart} setSearchQuery={setSearchQuery} />
+      <Header  
+          items={items} 
+          cart={cart} 
+          removeFromCart={removeFromCart} 
+          setSearchQuery={setSearchQuery} />
       <ChatToggle/>
       
       <Routes>
@@ -121,9 +125,17 @@ function App() {
             />
           }
         />
-        <Route path="/:id" element={<ItemDetail items={items} addToCart={addToCart} />} />
+        <Route 
+            path="/:id" 
+            element={
+                <ItemDetail 
+                  items={items} 
+                  addToCart={addToCart} 
+                />
+              } 
+        />
 
-        <Route path="/aboutus" element={<AboutUs  items={items} favorites={favorites} removeFromFavorites={removeFromFavorites} />} />
+        <Route path="/aboutus" element={<AboutUs  items={items} favorites={favorites} removeFromFavorites={removeFromFavorites}  addToCart={addToCart}/>} />
         <Route path="/basket" element={<Basket cart={cart} removeFromCart={removeFromCart} />} />
         <Route path="/showrooms" element={<ShowRooms />} />
         <Route path="/profile" element={<UserProfile/>} />

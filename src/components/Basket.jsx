@@ -1,28 +1,31 @@
+import { Link } from "react-router-dom";
 
 
 
 const Basket = ({ cart, removeFromCart }) => {
     return (
-      <div className="wrapper text-gray-600 px-3">
+      <div className="wrapper text-gray-600 px-3 lg:px-0">
         <h1 className="text-xl md:text-2xl font-bold text-center mt-28 mb-4 md:mt-32">
           Оформление заказа
         </h1>
         {cart.length > 0 ? (
-          <ul className="space-y-6">
+          <ul>
             {cart.map((item) => (
               <li
                 key={item.id}
                 className="w-full border-b py-4 flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0"
               >
                 <div className="flex flex-col w-full md:flex-row  md:items-center space-y-4 md:space-y-0 md:space-x-4">
-                  <img
-                    src={item.img}
-                    className="w-full md:w-80 lg:w-96 h-60 sm:h-72 md:h-56 object-cover object-top"
-                    alt={item.title}
-                  />
+                  <Link to={`/${item.id}`}>
+                    <img
+                      src={item.img}
+                      className="w-full rounded-lg shadow-lg md:w-80 lg:w-96 h-60 sm:h-72 md:h-56 object-cover object-top"
+                      alt={item.title}
+                    />
+                  </Link>
                   <div className="flex flex-col space-y-2 float-left">
                     <span className="font-semibold text-xl">
-                      {item.title}
+                    <Link to={`/${item.id}`}>{item.title}</Link>
                       {item.quantity > 1 && (
                         <span className="text-sm md:text-md ml-2">
                           x{item.quantity}
