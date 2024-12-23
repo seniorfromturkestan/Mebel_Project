@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const MobileMenu = ({ isOpen, toggleMenu, searchInput, handleSearchClick, handleSearchInput}) => {
 
     return (
-        <div>
+        <div className='text-gray-600'>
             <div
                 className={`absolute top-0 left-0 right-0 bg-black opacity-50 z-10 min-h-[150vh] transition-opacity duration-300 ${
                     isOpen ? "opacity-50 block" : "opacity-0 hidden"
@@ -36,7 +36,7 @@ const MobileMenu = ({ isOpen, toggleMenu, searchInput, handleSearchClick, handle
                         placeholder="Поиск товаров"
                         value={searchInput}
                         onChange={handleSearchInput}
-                        className="w-full p-3 border rounded-lg shadow-md focus:outline-none"
+                        className="w-full p-3 border rounded-lg border-white shadow-md focus:outline-none"
                     />
             
                     <div className="absolute top-1/2 right-1 text-lg transform -translate-y-1/2 px-3 py-2 text-gray-600 rounded-lg hover:opacity-80 transition duration-300"
@@ -48,10 +48,8 @@ const MobileMenu = ({ isOpen, toggleMenu, searchInput, handleSearchClick, handle
                     
                     >
                         Найти
-                        {/* <FaSearch/> */}
                     </div>
                 </div>
-
                 <nav className="flex flex-col mt-6 space-y-5 text-lg md:mt-20 font-medium px-3">
                     <div className="hover:text-gray-600 transition duration-200">
                         Каталог

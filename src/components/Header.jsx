@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { FaCartShopping, FaHeart, FaUser, FaBars, FaTrash } from 'react-icons/fa6';
 import { Link, useLocation } from 'react-router-dom';
-import { IoSearchOutline } from "react-icons/io5";
+import { IoSearchOutline } from 'react-icons/io5';
 import MobileMenu from './MobileMenu';
-import { FaPhoneAlt } from "react-icons/fa";
-import { FaMapMarkerAlt } from "react-icons/fa";
+import { FaPhoneAlt } from 'react-icons/fa';
+import { FaMapMarkerAlt } from 'react-icons/fa';
 
 const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
     const [cartOpen, setCartOpen] = useState(false);
@@ -99,7 +99,6 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
             <div className="wrapper">
                 <header className="relative w-full px-3 xl:px-0" onMouseLeave={handleMouseLeave}>
                     <div className="flex lg:justify-between items-center bg-white pt-5">
-
                         <div className="lg:hidden flex items-center mr-auto lg:mr-0">
                             <button
                                 onClick={toggleMenu}
@@ -109,7 +108,6 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                             >
                                 <FaBars />
                             </button>
-
                             <MobileMenu
                                 isOpen={menuOpen}
                                 toggleMenu={toggleMenu}
@@ -117,20 +115,17 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                                 handleSearchClick={handleSearchClick}
                                 handleSearchInput={handleSearchInput}
                             />
-
                         </div>
-
                         <Link to="/" className="text-2xl mr-auto lg:mr-0 font-bold text-gray-600">FurniLand</Link>
                         <FaMapMarkerAlt className='lg:hidden md:order-1 text-2xl text-gray-600' />
                         <FaPhoneAlt className='lg:hidden md:order-2 text-2xl text-gray-600 ml-5' />
-
                         <div className="hidden md:block mr-10 lg:mr-0 w-2/5 relative">
                             <input
                                 type="text"
                                 placeholder="Поиск товаров"
                                 value={searchInput}
                                 onChange={handleSearchInput}
-                                className="w-full p-3 px-10 border rounded-lg shadow-md focus:outline-none"
+                                className={`w-full p-3 px-10 border rounded-lg shadow-md border-white focus:outline-none ${showDropdown && searchResults.length > 0 && `rounded-b-none`}`}
                             />
                             <IoSearchOutline
                                 className="absolute top-3 left-3 text-2xl text-gray-400 cursor-pointer"
@@ -141,12 +136,12 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                                     handleSearchClick();
                                     setShowDropdown(false); 
                                 }}
-                                className="absolute top-1 right-1 px-4 py-2 bg-gray-600 text-white rounded-lg hover:opacity-80 transition duration-300"
+                                className="absolute top-1.5 right-1 px-4 py-2 bg-gray-600 text-white rounded-lg hover:opacity-80 transition duration-300"
                             >
                                 Найти
                             </button>
                             {showDropdown && searchResults.length > 0 && (
-                                <ul className="absolute top-full w-full bg-white border shadow-md max-h-72 overflow-y-auto z-10">
+                                <ul className="absolute py-3 w-full bg-white rounded-b-lg shadow-lg max-h-72 overflow-y-auto z-10">
                                     {searchResults.map((item) => (
                                         <Link
                                             to={`/${item.id}`}
@@ -164,10 +159,8 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                                 </ul>
                             )}
                         </div>
-
-
                         <ul className="hidden lg:flex items-center">
-                            <Link to="/basket">
+                            <Link to="/basket" className='cursor-pointer hover:opacity-80 transition duration-200'>
                                 <FaCartShopping
                                     onMouseEnter={handleMouseEnter}
                                     className={`text-2xl cursor-pointer transition duration-300 ${
@@ -199,7 +192,7 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                         </ul>
 
                         <div
-                            className={`absolute top-16 py-3 right-0 w-[450px] min-h-[100px] bg-white shadow-[0px_0px_9px_2px_rgba(0,_0,_0,_0.1)] z-10 transform transition-all duration-300 ${
+                            className={`absolute top-16 py-3 right-0 w-[450px] min-h-[100px] rounded-lg bg-white shadow-[0px_0px_9px_2px_rgba(0,_0,_0,_0.1)] z-10 transform transition-all duration-300 ${
                                 cartOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
                             }`}
                             onMouseEnter={handleMouseEnter}

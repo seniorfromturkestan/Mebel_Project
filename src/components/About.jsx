@@ -1,9 +1,9 @@
-
 import { useEffect, useState } from 'react';
 import bg1 from '../img/home1.jpg';
 import bg2 from '../img/bg2.jpg';
 import bg3 from '../img/bg3.jpg';
 import bg4 from '../img/bg4.jpg';
+import bg5 from '../img/mebelNY.jpg';
 import { FaAngleLeft } from "react-icons/fa6";
 import { FaAngleRight } from "react-icons/fa6";
 
@@ -29,6 +29,11 @@ const About = () => {
       title: 'Всегда лучшие спальни',
       subtitle: 'по низким ценам',
     },
+    {
+      image: bg5,
+      title: 'Новогодняя распродажа мебели',
+      subtitle: 'праздичные цены',
+    },
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -40,7 +45,7 @@ const About = () => {
     }, 5000);
 
     return () => clearInterval(interval);
-  });
+  }, );
 
   const nextSlide = () => {
     setDirection('right');
@@ -56,21 +61,25 @@ const About = () => {
     );
   };
 
+  const handleDotClick = (index) => {
+    setCurrentIndex(index);
+  };
+
   return (
     <div className="wrapper">
       <div className="relative w-full max-w-[1280px] mx-auto mt-24 lg:mt-28 px-3 xl:px-0">
         <div className="relative items-center justify-center">
           <button
-            className="absolute left-0 top-[45%] z-10  text-white text-4xl"
+            className="absolute left-0 top-[45%] z-10 text-white text-4xl"
             onClick={prevSlide}
           >
             <FaAngleLeft />
           </button>
-          <div className="w-full h-[320px] md:h-[400px] lg:h-[500px] rounded-xl  relative overflow-hidden overflow-x-scroll scrollbar-hide">
+          <div className="w-full h-[320px] md:h-[400px] lg:h-[500px] rounded-xl relative overflow-hidden overflow-x-scroll scrollbar-hide">
             {slides.map((slide, index) => (
               <div
                 key={index}
-                className={`absolute w-full h-full bg-cover bg-center rounded-xl  bg-blend-multiply bg-[#bcbcbc] transition-transform duration-300 ${
+                className={`absolute w-full h-full bg-cover bg-center rounded-xl bg-blend-multiply bg-[#bcbcbc] transition-transform duration-300 ${
                   index === currentIndex
                     ? 'translate-x-0'
                     : direction === 'right'
@@ -90,15 +99,24 @@ const About = () => {
             ))}
           </div>
           <button
-            className="absolute right-0 top-[45%] z-10  text-white text-4xl"
+            className="absolute right-0 top-[45%] z-10 text-white text-4xl"
             onClick={nextSlide}
           >
             <FaAngleRight />
           </button>
         </div>
 
-        
-
+        <div className="flex justify-center mt-2 lg:mt-4">
+          {slides.map((_, index) => (
+            <div
+              key={index}
+              onClick={() => handleDotClick(index)}
+              className={`w-2 h-2 lg:w-3 lg:h-3 mx-1 rounded-full cursor-pointer ${
+                currentIndex === index ? 'bg-gray-600' : 'bg-gray-400'
+              }`}
+            ></div>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import About from "./About";
 import { FaRegHeart } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa6";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import Button from "./Button";
 
 const categoryNames = {
@@ -14,13 +14,10 @@ const categoryNames = {
 };
 const Items = ({ items, addToCart, searchQuery = '', clickedHeart, toggledItems = {} }) => {
     const [selectedCategory, setSelectedCategory] = useState('all');
-
     const filteredItems = selectedCategory === 'all'
         ? items
         : items.filter(item => item.category === selectedCategory);
-
     const categories = ['all', ...new Set(items?.map(item => item.category))];
-
     const filteredItem = filteredItems.filter(item =>
         item.title?.toLowerCase().includes(searchQuery.toLowerCase())
     );
@@ -28,7 +25,6 @@ const Items = ({ items, addToCart, searchQuery = '', clickedHeart, toggledItems 
     return (
         <div className="wrapper">
             <About/>
-
             <div className="flex md:flex-wrap space-x-3 my-5 pl-3 xl:pl-0 overflow-x-auto max-h-12 md:max-h-20 scrollbar-hide">
                 {categories.map((category) => (
                     <button
