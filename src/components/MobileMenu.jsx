@@ -10,7 +10,7 @@ const MobileMenu = ({ isOpen, toggleMenu, searchInput, handleSearchClick, handle
     return (
         <div className='text-gray-600'>
             <div
-                className={`absolute top-0 left-0 right-0 bg-white opacity-50 z-10 min-h-screen transition-opacity duration-300 ${
+                className={`absolute top-0 left-0 right-0 bg-black opacity-50 z-10 min-h-screen transition-opacity duration-300 ${
                     isOpen ? "opacity-50 block" : "opacity-0 hidden"
                 }`}
                 onClick={toggleMenu}

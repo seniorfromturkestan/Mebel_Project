@@ -94,7 +94,8 @@ function App() {
           items={items} 
           cart={cart} 
           removeFromCart={removeFromCart} 
-          setSearchQuery={setSearchQuery} />
+          setSearchQuery={setSearchQuery}
+          count={cart.length} />
       <ChatToggle/>
       
       <Routes>

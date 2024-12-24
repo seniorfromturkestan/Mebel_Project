@@ -6,7 +6,7 @@ import MobileMenu from './MobileMenu';
 import { FaPhoneAlt } from 'react-icons/fa';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 
-const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
+const Header = ({ cart, removeFromCart, setSearchQuery, items, count }) => {
     const [cartOpen, setCartOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [searchInput, setSearchInput] = useState('');
@@ -92,6 +92,19 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
+    const getPlural = (count, one, few, many) => {
+        if (count % 10 === 1 && count % 100 !== 11) {
+          return one; // 1 товар
+        } else if (
+          count % 10 >= 2 &&
+          count % 10 <= 4 &&
+          (count % 100 < 10 || count % 100 >= 20)
+        ) {
+          return few; // 2 товара
+        } else {
+          return many; // 5 товаров
+        }
+      };
 
     return (
         <div className={`w-full bg-white shadow-md fixed z-20 h-20 lg:h-24 top-0 transition-transform duration-300 
@@ -170,7 +183,7 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items }) => {
                                     }`}
                                 />
                             </Link>
-                            <span className="ml-2 text-sm">{cart.length} товаров</span>
+                            <span className="ml-2 text-sm w-20">{count} {getPlural(count, "товар", "товара", "товаров")}</span>
 
                             <Link to="/aboutus" className="flex items-center ml-5 cursor-pointer hover:opacity-80 transition duration-200">
                                 <FaHeart className={`text-2xl cursor-pointer transition duration-300 ${
