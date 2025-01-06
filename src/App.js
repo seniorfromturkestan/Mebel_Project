@@ -12,34 +12,27 @@ import BottomNav from './components/BottomNav';
 import ShowRooms from './components/ShowRooms';
 import UserProfile from './components/UserProfile';
 
-
 function App() {
-  const [cart, setCart] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [favorites, setFavorites] = useState([]);
-  const [toggledItems, setToggledItems] = useState(() => {
-    const saved = localStorage.getItem('favorites');
-    return saved ? JSON.parse(saved) : {};
-});
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem('cart');
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
 
-  
+  const [favorites, setFavorites] = useState(() => {
+    const savedFavorites = localStorage.getItem('favorites');
+    return savedFavorites ? JSON.parse(savedFavorites) : [];
+  });
+
+
+  const [searchQuery, setSearchQuery] = useState('');
+
   useEffect(() => {
-    const savedCart = JSON.parse(localStorage.getItem('cart'));
-    if (savedCart) {
-      setCart(savedCart);
-    }
-  }, []);
-  
-  useEffect(() => {
-    if (cart.length > 0) {
-      localStorage.setItem('cart', JSON.stringify(cart));
-    } else {
-      localStorage.removeItem('cart');
-    }
+    localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
- 
-  
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }, [favorites]);
 
   const addToCart = (item) => {
     setCart((prevCart) => {
@@ -55,49 +48,50 @@ function App() {
       }
     });
   };
- 
+
   const removeFromCart = (id) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
 
-  const removeFromFavorites = (id) => {
-    const updatedFavorites = favorites.filter((favId) => favId !== id);
-    setFavorites(updatedFavorites);
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+  const toggleFavorite = (id) => {
+    setFavorites((prevFavorites) => {
+      const isFavorite = prevFavorites.includes(id);
+      return isFavorite
+        ? prevFavorites.filter((favId) => favId !== id) 
+        : [...prevFavorites, id];
+    });
   };
 
   const clickedHeart = (id) => {
-    setToggledItems((prev) => {
-        const updated = { ...prev };
-        if (updated[id]) {
-            delete updated[id]; 
-        } else {
-            updated[id] = true;
-        }
-        localStorage.setItem('favorites', JSON.stringify(updated)); 
-        return updated;
-    });
-
-
     setFavorites((prevFavorites) => {
-      if (prevFavorites.includes(id)) {
-        return prevFavorites.filter((favId) => favId !== id);
-      } else {
-        return [...prevFavorites, id];
-      }
+      const isFavorite = prevFavorites.includes(id);
+      const updatedFavorites = isFavorite
+        ? prevFavorites.filter((favId) => favId !== id) 
+        : [...prevFavorites, id]; 
+  
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+      return updatedFavorites;
     });
   };
   
+  
+
+  const removeFromFavorites = (id) => {
+    setFavorites((prevFavorites) => prevFavorites.filter((favId) => favId !== id));
+  };
+
   return (
-    <div className='bg-white'>
-      <Header  
-          items={items} 
-          cart={cart} 
-          removeFromCart={removeFromCart} 
-          setSearchQuery={setSearchQuery}
-          count={cart.length} />
-      <ChatToggle/>
-      
+    <div className="bg-white">
+      <Header
+        items={items}
+        cart={cart}
+        removeFromCart={removeFromCart}
+        setSearchQuery={setSearchQuery}
+        count={cart.length}
+        favorites={favorites}
+      />
+      <ChatToggle />
+
       <Routes>
         <Route
           path="/"
@@ -105,36 +99,49 @@ function App() {
             <Items
               items={items}
               addToCart={addToCart}
-              searchQuery={searchQuery} 
-              clickedHeart={clickedHeart}
+              searchQuery={searchQuery}
+              toggleFavorite={toggleFavorite}
               favorites={favorites}
-              toggledItems={toggledItems}
+              clickedHeart={clickedHeart}
+
             />
           }
         />
-        <Route 
-            path="/:id" 
-            element={
-                <ItemDetail 
-                  items={items} 
-                  addToCart={addToCart} 
-                  clickedHeart={clickedHeart}
-                />
-              } 
+        <Route
+          path="/:id"
+          element={
+            <ItemDetail
+              items={items}
+              addToCart={addToCart}
+              toggleFavorite={toggleFavorite}
+              favorites={favorites}
+              clickedHeart={clickedHeart}
+              removeFromFavorites={removeFromFavorites}
+
+            />
+          }
         />
-
-        <Route path="/aboutus" element={<AboutUs  items={items} favorites={favorites} removeFromFavorites={removeFromFavorites}  addToCart={addToCart}/>} />
-        <Route path="/basket" element={<Basket cart={cart} removeFromCart={removeFromCart} />} />
+        <Route
+          path="/aboutus"
+          element={
+            <AboutUs
+              items={items}
+              favorites={favorites}
+              toggleFavorite={toggleFavorite}
+              addToCart={addToCart}
+              clickedHeart={clickedHeart}
+              removeFromFavorites={removeFromFavorites}
+            />
+          }
+        />
+        <Route
+          path="/basket"
+          element={<Basket cart={cart} removeFromCart={removeFromCart} />}
+        />
         <Route path="/showrooms" element={<ShowRooms />} />
-        <Route path="/profile" element={<UserProfile/>} />
-
-
-
-
+        <Route path="/profile" element={<UserProfile />} />
       </Routes>
       <BottomNav />
-
-      
       <Footer />
     </div>
   );

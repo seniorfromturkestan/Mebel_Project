@@ -6,7 +6,7 @@ import MobileMenu from './MobileMenu';
 import { FaPhoneAlt } from 'react-icons/fa';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 
-const Header = ({ cart, removeFromCart, setSearchQuery, items, count }) => {
+const Header = ({ cart, removeFromCart, setSearchQuery, items, count, favorites }) => {
     const [cartOpen, setCartOpen] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [searchInput, setSearchInput] = useState('');
@@ -94,15 +94,15 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items, count }) => {
     };
     const getPlural = (count, one, few, many) => {
         if (count % 10 === 1 && count % 100 !== 11) {
-          return one; // 1 товар
+          return one; 
         } else if (
           count % 10 >= 2 &&
           count % 10 <= 4 &&
           (count % 100 < 10 || count % 100 >= 20)
         ) {
-          return few; // 2 товара
+          return few; 
         } else {
-          return many; // 5 товаров
+          return many; 
         }
       };
 
@@ -191,10 +191,11 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items, count }) => {
                                         ? 'text-red-600'
                                         : 'text-gray-600'
                                 }`} />
+                                {/* <div className='absolute text-white ml-2 text-xs'>
+                                    {favorites.length}
+                                </div> */}
                             </Link>
-
                             <Link to="/profile" className="ml-5 cursor-pointer hover:opacity-80 transition duration-200">
-                                   
                                 <FaUser className={`text-2xl text-gray-600 ${
                                     location.pathname === '/profile'
                                     ? 'text-red-600'
@@ -215,8 +216,7 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items, count }) => {
                             {cart.length > 0 ? (
                                 <ul className="mt-3 max-h-[300px] overflow-y-auto">
                                     {cart.map((item) => (
-                                        <li className="border-b py-4 px-4 flex items-center justify-between hover:bg-gray-100 ease-in-out duration-200"
->
+                                        <li className="border-b py-4 px-4 flex items-center justify-between hover:bg-gray-100 ease-in-out duration-200">
                                             <Link
                                                 to={`/${item.id}`}
                                                 key={item.id}
