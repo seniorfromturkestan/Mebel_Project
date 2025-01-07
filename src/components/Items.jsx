@@ -4,6 +4,7 @@ import { FaRegHeart } from "react-icons/fa6";
 import { FaHeart } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import Button from "./Button";
+import Skeleton from "./Skeleton";
 
 const categoryNames = {
   chairs: 'Стулья',
@@ -65,8 +66,9 @@ const Items = ({ items, addToCart, searchQuery = '', clickedHeart, favorites = [
             <div key={item.id} className="w-full relative mb-3">
               <div className="rounded-lg shadow-lg h-[230px] sm:h-[290px] lg:h-[300px] overflow-hidden mb-3">
                 <Link to={`/${item.id}`}>
-                  <img
+                  <Skeleton
                     className="w-full h-[230px] sm:h-[290px] lg:h-[300px] object-cover brightness-90 mb-3 hover:scale-105 hover:brightness-100 transition duration-500 cursor-pointer"
+                    skeletonClassName="w-full h-[230px] sm:h-[290px] lg:h-[300px] bg-gray-200 animate-pulse rounded-lg"
                     src={item.img}
                     alt={item.title || 'Изображение'}
                   />
