@@ -67,7 +67,7 @@ const About = () => {
 
   return (
     <div className="wrapper">
-      <div className="relative w-full max-w-[1280px] mx-auto mt-24 lg:mt-28 px-3 xl:px-0">
+      <div className="relative w-full max-w-[1280px] mx-auto mt-[85px] lg:mt-28 px-3 xl:px-0">
         <div className="relative items-center justify-center">
           <button
             className="absolute left-0 top-[45%] z-10 text-white text-4xl"

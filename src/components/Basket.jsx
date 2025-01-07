@@ -6,7 +6,7 @@ import Button from "./Button";
 const Basket = ({ cart, removeFromCart }) => {
     return (
       <div className="wrapper text-gray-600 px-3 xl:px-0">
-          <h1 className="text-xl md:text-2xl font-bold text-center mt-28 mb-4 md:mt-32">
+          <h1 className="text-xl md:text-2xl font-bold text-center mt-24 mb-4 md:mt-32">
             Оформление заказа
           </h1>
         {cart.length > 0 ? (

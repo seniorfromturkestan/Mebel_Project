@@ -24,7 +24,7 @@ const ItemDetail = ({ items, addToCart, favorites, toggleFavorite }) => {
 
   return (
     <div className="wrapper px-3 xl:px-0">
-      <div className="mt-28 lg:mt-32 flex flex-col lg:flex-row items-center lg:items-start gap-6 lg:gap-10">
+      <div className="mt-24 lg:mt-32 flex flex-col lg:flex-row items-center lg:items-start gap-6 lg:gap-10">
         <img
           src={item.img}
           alt={item.title}

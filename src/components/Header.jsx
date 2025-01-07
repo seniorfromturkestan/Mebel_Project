@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaCartShopping, FaHeart, FaUser, FaBars, FaTrash } from 'react-icons/fa6';
+import { FaCartShopping, FaHeart, FaUser, FaBars, FaTrash, FaStore } from 'react-icons/fa6';
 import { Link, useLocation } from 'react-router-dom';
 import { IoSearchOutline } from 'react-icons/io5';
 import MobileMenu from './MobileMenu';
@@ -107,7 +107,7 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items, count, favorites 
       };
 
     return (
-        <div className={`w-full bg-white shadow-md fixed z-20 h-20 lg:h-24 top-0 transition-transform duration-300 
+        <div className={`w-full bg-white shadow-md fixed z-20 h-[75px] lg:h-24 -top-1 transition-transform duration-300 
                         ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'}`}>
             <div className="wrapper">
                 <header className="relative w-full px-3 xl:px-0" onMouseLeave={handleMouseLeave}>
@@ -184,7 +184,13 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items, count, favorites 
                                 />
                             </Link>
                             <span className="ml-2 text-sm w-20">{count} {getPlural(count, "товар", "товара", "товаров")}</span>
-
+                            <Link to="/showrooms" className="flex items-center ml-5 cursor-pointer hover:opacity-80 transition duration-200">
+                                <FaStore className={`text-2xl cursor-pointer transition duration-300 ${
+                                    location.pathname === '/showrooms'
+                                        ? 'text-red-600'
+                                        : 'text-gray-600'
+                                }`} />
+                            </Link>
                             <Link to="/aboutus" className="flex items-center ml-5 cursor-pointer hover:opacity-80 transition duration-200">
                                 <FaHeart className={`text-2xl cursor-pointer transition duration-300 ${
                                     location.pathname === '/aboutus'

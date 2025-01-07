@@ -1,13 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaHouse, FaHeart, FaCartShopping, FaStore, FaUser } from 'react-icons/fa6';
 import { Link, useLocation } from 'react-router-dom';
 
 const BottomNav = () => {
-  const location = useLocation(); 
+  const location = useLocation();
+  const [isScrolledDown, setIsScrolledDown] = useState(false); 
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+    if (currentScrollY > lastScrollY) {
+      setIsScrolledDown(true);
+    } else {
+      setIsScrolledDown(false);
+    }
+    setLastScrollY(currentScrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, );
+
   const getActiveClass = (path) => (location.pathname === path ? '!text-red-600' : '');
 
   return (
-    <div className="lg:hidden fixed bottom-0 left-0 w-full bg-white shadow-lg border-t border-gray-200 z-10">
+    <div
+      className={`lg:hidden fixed bottom-0 left-0 w-full bg-white shadow-lg border-t border-gray-200 z-10 transition-[padding] duration-300 ${
+        isScrolledDown ? 'pb-5' : 'pb-auto'
+      }`}
+    >
       <div className="flex justify-around items-center py-3 text-gray-600">
         <Link
           to="/"

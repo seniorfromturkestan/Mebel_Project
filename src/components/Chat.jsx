@@ -9,7 +9,7 @@ const ChatToggle = () => {
     };
 
     return (
-        <div className="fixed bottom-20 lg:bottom-5 lg:right-5 right-3 flex items-center space-x-3 z-30">
+        <div className="fixed bottom-24 lg:bottom-5 lg:right-5 right-2 flex items-center space-x-3 z-30">
             {isOpen && (
                 <a
                     href="https://wa.me/+77002355409"

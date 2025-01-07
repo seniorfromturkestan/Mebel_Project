@@ -6,7 +6,7 @@ const AboutUs = ({ items, favorites, removeFromFavorites, addToCart }) => {
   return (
     <div className="wrapper text-gray-600">
       <div className="px-3 xl:px-0">
-        <div className="mt-28 lg:mt-32">
+        <div className="mt-24 lg:mt-32">
           <h2 className="text-xl md:text-2xl mb-4 font-bold text-center">Избранные</h2>
           {favorites.length > 0 ? (
             <ul>
