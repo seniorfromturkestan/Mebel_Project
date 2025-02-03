@@ -30,7 +30,7 @@ const Modal = ({ message, onClose }) => {
 
 const Items = ({ items, addToCart, searchQuery = '', clickedHeart, favorites = [] }) => {
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [showModal, setShowModal] = useState(false);  // Состояние для модального окна
+  const [showModal, setShowModal] = useState(false);  
   const filteredItems = selectedCategory === 'all'
     ? items
     : items.filter(item => item.category === selectedCategory);

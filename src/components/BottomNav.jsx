@@ -27,7 +27,7 @@ const BottomNav = () => {
   return (
     <div
       className={`lg:hidden fixed bottom-0 left-0 w-full bg-white shadow-lg border-t border-gray-200 z-10 transition-[padding] duration-300 ${
-        isScrolledDown ? 'pb-5' : 'pb-auto'
+        isScrolledDown ? 'pb-0' : 'pb-auto'
       }`}
     >
       <div className="flex justify-around items-center py-3 text-gray-600">
