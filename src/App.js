@@ -14,72 +14,101 @@ import UserProfile from './components/UserProfile';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
 
+import { db } from '../src/helpers/firebase';
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+
 function App() {
-  const [cart, setCart] = useState(() => {
-    const savedCart = localStorage.getItem('cart');
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
-
-  const [favorites, setFavorites] = useState(() => {
-    const savedFavorites = localStorage.getItem('favorites');
-    return savedFavorites ? JSON.parse(savedFavorites) : [];
-  });
-
-
+  const [cart, setCart] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [userId, setUserId] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
-
-  useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-  }, [favorites]);
-
-  const addToCart = (item) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find((cartItem) => cartItem.id === item.id);
-      if (existingItem) {
-        return prevCart.map((cartItem) =>
-          cartItem.id === item.id
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem
-        );
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserId(user.uid); 
       } else {
-        return [...prevCart, { ...item, quantity: 1 }];
+        setUserId(null); 
       }
     });
-  };
 
-  const removeFromCart = (id) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
-  };
+    return () => unsubscribe(); 
+  }, []);
 
-  const toggleFavorite = (id) => {
-    setFavorites((prevFavorites) => {
-      const isFavorite = prevFavorites.includes(id);
-      return isFavorite
-        ? prevFavorites.filter((favId) => favId !== id) 
-        : [...prevFavorites, id];
+  useEffect(() => {
+    if (!userId) return; 
+
+    const fetchData = async () => {
+      const userRef = doc(db, 'users', userId);
+      const userSnap = await getDoc(userRef);
+
+      if (userSnap.exists()) {
+        const userData = userSnap.data();
+        setCart(userData.cart || []);
+        setFavorites(userData.favorites || []);
+      } else {
+        await setDoc(userRef, { cart: [], favorites: [] });
+      }
+    };
+
+    fetchData();
+  }, [userId]);
+
+  const addToCart = async (item) => {
+    if (!userId) return;
+
+    const userRef = doc(db, 'users', userId);
+    setCart((prevCart) => {
+      const existingItem = prevCart.find((cartItem) => cartItem.id === item.id);
+      const updatedCart = existingItem
+        ? prevCart.map((cartItem) =>
+            cartItem.id === item.id
+              ? { ...cartItem, quantity: cartItem.quantity + 1 }
+              : cartItem
+          )
+        : [...prevCart, { ...item, quantity: 1 }];
+      updateDoc(userRef, { cart: updatedCart });
+      return updatedCart;
     });
   };
 
-  const clickedHeart = (id) => {
+  const removeFromCart = async (id) => {
+    if (!userId) return; 
+    const userRef = doc(db, 'users', userId);
+    setCart((prevCart) => {
+      const updatedCart = prevCart.filter((item) => item.id !== id);
+      updateDoc(userRef, { cart: updatedCart });
+      return updatedCart;
+    });
+  };
+
+  const toggleFavorite = async (id) => {
+    if (!userId) return; 
+
+    const userRef = doc(db, 'users', userId);
     setFavorites((prevFavorites) => {
       const isFavorite = prevFavorites.includes(id);
       const updatedFavorites = isFavorite
-        ? prevFavorites.filter((favId) => favId !== id) 
-        : [...prevFavorites, id]; 
-  
-      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+        ? prevFavorites.filter((favId) => favId !== id)
+        : [...prevFavorites, id];
+
+      updateDoc(userRef, { favorites: updatedFavorites });
       return updatedFavorites;
     });
   };
-  
-  
 
-  const removeFromFavorites = (id) => {
-    setFavorites((prevFavorites) => prevFavorites.filter((favId) => favId !== id));
+  const removeFromFavorites = async (id) => {
+    if (!userId) return; 
+
+    const userRef = doc(db, 'users', userId);
+    setFavorites((prevFavorites) => {
+      const updatedFavorites = prevFavorites.filter((favId) => favId !== id);
+      updateDoc(userRef, { favorites: updatedFavorites });
+      return updatedFavorites;
+    });
   };
 
   return (
@@ -104,8 +133,7 @@ function App() {
               searchQuery={searchQuery}
               toggleFavorite={toggleFavorite}
               favorites={favorites}
-              clickedHeart={clickedHeart}
-
+              isAuthenticated={isAuthenticated}
             />
           }
         />
@@ -117,33 +145,15 @@ function App() {
               addToCart={addToCart}
               toggleFavorite={toggleFavorite}
               favorites={favorites}
-              clickedHeart={clickedHeart}
-              removeFromFavorites={removeFromFavorites}
-
             />
           }
         />
-        <Route
-          path="/aboutus"
-          element={
-            <AboutUs
-              items={items}
-              favorites={favorites}
-              toggleFavorite={toggleFavorite}
-              addToCart={addToCart}
-              clickedHeart={clickedHeart}
-              removeFromFavorites={removeFromFavorites}
-            />
-          }
-        />
-        <Route
-          path="/basket"
-          element={<Basket cart={cart} removeFromCart={removeFromCart} />}
-        />
+        <Route path="/aboutus" element={<AboutUs items={items} favorites={favorites} removeFromFavorites={removeFromFavorites} addToCart={addToCart} />} />
+        <Route path="/basket" element={<Basket cart={cart} removeFromCart={removeFromCart} />} />
         <Route path="/showrooms" element={<ShowRooms />} />
-        <Route path="signup" element={<SignUp />} />
-        <Route path="signin" element={<SignIn />} />
-        <Route path="profile" element={<UserProfile />} />
+        <Route path="/signin" element={<SignIn setIsAuthenticated={setIsAuthenticated} />} />
+        <Route path="/signup" element={<SignUp setIsAuthenticated={setIsAuthenticated} />} />
+        <Route path="/profile" element={<UserProfile />} />
       </Routes>
       <BottomNav />
       <Footer />

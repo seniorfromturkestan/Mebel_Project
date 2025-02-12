@@ -12,7 +12,7 @@ export default function Profile() {
       if (user) {
         setUserEmail(user.email);
       } else {
-        navigate("/signin"); // Убрал слэш
+        navigate("/signin"); 
       }
     });
 
@@ -22,7 +22,7 @@ export default function Profile() {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      navigate("/signin"); // Убрал слэш
+      navigate("/signin");
     } catch (err) {
       console.error("Ошибка при выходе:", err);
     }

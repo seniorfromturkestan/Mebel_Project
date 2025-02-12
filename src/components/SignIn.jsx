@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../helpers/firebase";
 import { Link, useNavigate } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -18,9 +20,20 @@ export default function SignIn() {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       setSuccessMessage("Вход выполнен успешно!");
-      navigate("/profile"); 
+      navigate("/profile");
     } catch (err) {
       setError("Неверный email или пароль. Попробуйте снова.");
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      setSuccessMessage("Вход через Google выполнен успешно!");
+      navigate("/profile");
+    } catch (err) {
+      setError("Ошибка при входе через Google.");
     }
   };
 
@@ -54,6 +67,12 @@ export default function SignIn() {
             Войти
           </button>
         </form>
+        <button
+          onClick={handleGoogleSignIn}
+          className="w-full mt-4 flex items-center justify-center gap-2 bg-white border border-gray-300 text-gray-700 py-2 rounded-lg shadow-sm hover:bg-gray-100 transition duration-200"
+        >
+          <FcGoogle className="text-xl" /> Войти через Google
+        </button>
         {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
         {successMessage && (
           <p className="text-green-500 mt-4 text-center">{successMessage}</p>
