@@ -11,6 +11,8 @@ import ItemDetail from './components/ItemDetail';
 import BottomNav from './components/BottomNav';
 import ShowRooms from './components/ShowRooms';
 import UserProfile from './components/UserProfile';
+import SignUp from './components/SignUp';
+import SignIn from './components/SignIn';
 
 function App() {
   const [cart, setCart] = useState(() => {
@@ -139,7 +141,9 @@ function App() {
           element={<Basket cart={cart} removeFromCart={removeFromCart} />}
         />
         <Route path="/showrooms" element={<ShowRooms />} />
-        <Route path="/profile" element={<UserProfile />} />
+        <Route path="signup" element={<SignUp />} />
+        <Route path="signin" element={<SignIn />} />
+        <Route path="profile" element={<UserProfile />} />
       </Routes>
       <BottomNav />
       <Footer />

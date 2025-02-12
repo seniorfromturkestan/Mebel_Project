@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { FaCartShopping, FaHeart, FaUser, FaBars, FaTrash, FaStore } from 'react-icons/fa6';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { IoSearchOutline } from 'react-icons/io5';
 import MobileMenu from './MobileMenu';
 import { FaPhoneAlt } from 'react-icons/fa';
 import { FaMapMarkerAlt } from 'react-icons/fa';
+import { auth } from "../helpers/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 const Header = ({ cart, removeFromCart, setSearchQuery, items, count, favorites }) => {
     const [cartOpen, setCartOpen] = useState(false);
@@ -15,7 +17,31 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items, count, favorites 
     const [isHeaderVisible, setIsHeaderVisible] = useState(true);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const navigate = useNavigate();
     const location = useLocation();
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        if (user) {
+            setIsLoggedIn(true);
+        } else {
+            setIsLoggedIn(false);
+        }
+        });
+
+        return () => unsubscribe();
+    }, []);
+
+  const handleUserIconClick = (e) => {
+    e.preventDefault();
+    if (isLoggedIn) {
+      navigate("/profile"); // Убрал слэш
+    } else {
+      navigate("/signup"); // Убрал слэш
+    }
+  };
+
     let lastScrollY = 0;
 
     useEffect(() => {
@@ -201,14 +227,19 @@ const Header = ({ cart, removeFromCart, setSearchQuery, items, count, favorites 
                                     {favorites.length}
                                 </div> */}
                             </Link>
-                            <Link to="/profile" className="ml-5 cursor-pointer hover:opacity-80 transition duration-200">
-                                <FaUser className={`text-2xl text-gray-600 ${
-                                    location.pathname === '/profile'
-                                    ? 'text-red-600'
-                                    : 'text-gray-600'
-
-                                }`} />
-                            </Link>
+                            <Link
+                                to={isLoggedIn ? "profile" : "signup"} // Убрал слэш
+                                onClick={handleUserIconClick}
+                                className="ml-5 cursor-pointer hover:opacity-80 transition duration-200"
+                                >
+                                <FaUser
+                                    className={`text-2xl ${
+                                    location.pathname === "/signup" || location.pathname === "/profile"
+                                        ? "text-red-600"
+                                        : "text-gray-600"
+                                    }`}
+                                />
+                                </Link>
                         </ul>
 
                         <div
